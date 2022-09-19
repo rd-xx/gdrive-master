@@ -1,0 +1,29 @@
+{
+	"name": "gdrive-master",
+	"version": "0.0.1",
+	"description": "Create Google Drive account services and keys easily.",
+	"main": "dist/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rd-xx/gdrive-master.git"
+	},
+	"author": "rdx",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/rd-xx/gdrive-master/issues"
+	},
+	"homepage": "https://github.com/rd-xx/gdrive-master#readme",
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.38.0",
+		"@typescript-eslint/parser": "^5.38.0",
+		"eslint": "^8.23.1",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"prettier": "^2.7.1",
+		"tsc-watch": "^5.0.3",
+		"typescript": "^4.8.3"
+	}
+}
