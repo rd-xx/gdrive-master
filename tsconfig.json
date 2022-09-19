@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"removeComments": true,
+		"strict": true
+	},
+	"include": ["**/*.ts"],
+	"exclude": ["node_modules"]
+}
