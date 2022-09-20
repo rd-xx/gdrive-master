@@ -3,6 +3,8 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"outDir": "dist",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"removeComments": true,
 		"strict": true
