@@ -18,7 +18,10 @@
 	},
 	"homepage": "https://github.com/rd-xx/gdrive-master#readme",
 	"dependencies": {
-		"i18n-js": "^4.1.1"
+		"@types/prompts": "^2.0.14",
+		"chalk": "^5.0.1",
+		"i18n-js": "^4.1.1",
+		"prompts": "^2.4.2"
 	},
 	"devDependencies": {
 		"@types/node": "^18.7.18",
