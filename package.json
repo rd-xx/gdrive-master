@@ -4,6 +4,7 @@
 	"description": "Create Google Drive account services and keys easily.",
 	"main": "dist/index.js",
 	"scripts": {
+		"start": "tsc-watch --onSuccess \"node .\"",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -16,7 +17,11 @@
 		"url": "https://github.com/rd-xx/gdrive-master/issues"
 	},
 	"homepage": "https://github.com/rd-xx/gdrive-master#readme",
+	"dependencies": {
+		"i18n-js": "^4.1.1"
+	},
 	"devDependencies": {
+		"@types/node": "^18.7.18",
 		"@typescript-eslint/eslint-plugin": "^5.38.0",
 		"@typescript-eslint/parser": "^5.38.0",
 		"eslint": "^8.23.1",
