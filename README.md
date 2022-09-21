@@ -1,6 +1,8 @@
 # gdrive-master
+
 Create Google Drive account services and keys easily.
 Why? Because I need it.
+See [TODO.md](TODO.md) for more information. It will be deleted when the 1.0.0 is finished.
 
 ## Requirements
 
