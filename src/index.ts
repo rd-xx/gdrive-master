@@ -1,4 +1,4 @@
-import { I18n } from '../node_modules/i18n-js/typings/I18n';
+import { I18n } from 'i18n-js';
 import translationFr from '../locales/fr.json';
 import translationEn from '../locales/en.json';
 import translationPt from '../locales/pt.json';
