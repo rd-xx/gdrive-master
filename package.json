@@ -2,7 +2,7 @@
 	"name": "gdrive-master",
 	"version": "0.0.1",
 	"description": "Create Google Drive account services and keys easily.",
-	"main": "dist/src/index.js",
+	"main": "dist/index.js",
 	"scripts": {
 		"start": "tsc-watch --onSuccess \"node .\"",
 		"test": "echo \"Error: no test specified\" && exit 1"
