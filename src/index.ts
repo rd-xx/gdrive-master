@@ -1,14 +1,9 @@
-import { I18n } from 'i18n-js';
-import translationFr from '../locales/fr.json';
-import translationEn from '../locales/en.json';
-import translationPt from '../locales/pt.json';
+import { join, normalize } from 'path';
+import { I18n } from 'i18n';
 
-const i18n = new I18n();
-i18n.store(translationEn);
-i18n.store(translationFr);
-i18n.store(translationPt);
-
-// const locale = Intl.DateTimeFormat().resolvedOptions().locale;
-// console.log(locale);
+const i18n = new I18n({
+	locales: ['en', 'fr', 'pt'],
+	directory: normalize(join(__dirname, '..', 'locales'))
+});
 
 async function main() {}
