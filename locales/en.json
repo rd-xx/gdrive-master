@@ -1,1 +1,8 @@
-{}
+{
+  "gcloudCheck": "Checking if %s is installed...",
+  "gcloudInstalled": "%s detected. Proceeding.",
+  "gcloudNotInstalled": "Seems like you don't have %s installed. Please install it and try again.",
+  "errorUnexpected": "An unexpected error occured.",
+  "errorStacktrace": "The stacktrace has been saved to %s. Please report this issue to rdx.",
+  "errorNoStacktrace": "The stacktrace could not be saved."
+}
