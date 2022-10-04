@@ -1,12 +1,12 @@
 {
-	"compilerOptions": {
-		"module": "CommonJS",
-		"target": "ESNext",
-		"outDir": "dist",
-		"esModuleInterop": true,
-		"removeComments": true,
-		"strict": true
-	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ESNext",
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "removeComments": true,
+    "strict": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

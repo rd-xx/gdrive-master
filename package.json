@@ -1,40 +1,40 @@
 {
-	"name": "gdrive-master",
-	"version": "0.0.1",
-	"description": "Create Google Drive account services and keys easily.",
-	"main": "dist/index.js",
-	"scripts": {
-		"start": "tsc-watch --onSuccess \"node .\"",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/rd-xx/gdrive-master.git"
-	},
-	"author": "rdx",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/rd-xx/gdrive-master/issues"
-	},
-	"homepage": "https://github.com/rd-xx/gdrive-master#readme",
-	"dependencies": {
-		"chalk": "^4.1.2",
-		"fs-extra": "^10.1.0",
-		"i18n": "^0.15.1",
-		"prompts": "^2.4.2"
-	},
-	"devDependencies": {
-		"@types/fs-extra": "^9.0.13",
-		"@types/i18n": "^0.13.4",
-		"@types/node": "^18.7.23",
-		"@types/prompts": "^2.0.14",
-		"@typescript-eslint/eslint-plugin": "^5.38.1",
-		"@typescript-eslint/parser": "^5.38.1",
-		"eslint": "^8.24.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-prettier": "^4.2.1",
-		"prettier": "^2.7.1",
-		"tsc-watch": "^5.0.3",
-		"typescript": "^4.8.4"
-	}
+  "name": "gdrive-master",
+  "version": "0.0.1",
+  "description": "Create Google Drive account services and keys easily.",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc-watch --onSuccess \"node .\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rd-xx/gdrive-master.git"
+  },
+  "author": "rdx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rd-xx/gdrive-master/issues"
+  },
+  "homepage": "https://github.com/rd-xx/gdrive-master#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "fs-extra": "^10.1.0",
+    "i18n": "^0.15.1",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/i18n": "^0.13.4",
+    "@types/node": "^18.7.23",
+    "@types/prompts": "^2.0.14",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "tsc-watch": "^5.0.3",
+    "typescript": "^4.8.4"
+  }
 }
