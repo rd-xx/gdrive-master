@@ -19,9 +19,8 @@
 	"homepage": "https://github.com/rd-xx/gdrive-master#readme",
 	"dependencies": {
 		"@types/prompts": "^2.0.14",
-		"chalk": "4.1.2",
+		"chalk": "^4.1.2",
 		"fs-extra": "^10.1.0",
-		"i18n-js": "^4.1.1",
 		"prompts": "^2.4.2"
 	},
 	"devDependencies": {
