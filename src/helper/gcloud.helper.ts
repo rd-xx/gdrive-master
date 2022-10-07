@@ -44,12 +44,27 @@ export function logout(): void {
   });
 }
 
-//     if (error instanceof Error) {
-//       console.log(error.message);
-//       console.log(error.stack);
-//       console.log(error.name);
-//       console.log(error.cause);
-//     }
+/**
+ * Create a new project on the Google Cloud Platform.
+ *
+ * @returns Nothing.
+ */
+export function createProject(): void {
+  let created = false;
+  while (!created) {
+    const randomNumber = Math.floor(Math.random() * (10000 - 0 + 1) + 0),
+      projectId = `${PROJECT_NAME.toLowerCase()}-${randomNumber}`,
+      cmd = spawnSync(
+        'gcloud',
+        ['projects', 'create', projectId, '--name', PROJECT_NAME],
+        {
+          shell: true
+        }
+      );
+
+    if (!cmd.stderr.toString().includes('already exists')) created = true;
+  }
+}
 
 //     handleError(String(error));
 //     return false;
