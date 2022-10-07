@@ -66,7 +66,8 @@ export function createProject(): void {
   }
 }
 
-//     handleError(String(error));
-//     return false;
-//   }
-// }
+export function createKey(): void {
+  spawnSync('gcloud', ['iam', 'service-accounts', 'keys', 'create'], {
+    shell: true
+  });
+}
