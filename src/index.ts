@@ -1,8 +1,10 @@
-import { isGcloudInstalled } from './helper/gcloud.helper';
+import { createProject, isGcloudInstalled } from './helper/gcloud.helper';
 import { welcomeUser } from './helper/stdout.helper';
 import { join, normalize } from 'path';
 import { I18n } from 'i18n';
 import chalk from 'chalk';
+import { StandaloneMode } from './types/miscellaneous.types';
+import { KEYS_QUANTITY } from './utils/constants';
 
 // Setup i18n
 const i18n = new I18n({
@@ -32,19 +34,25 @@ async function main() {
     '[🔨] ' + i18n.__('gcloudInstalled', chalk.cyan('gcloud CLI')) + '\n'
   );
 
+  // Log out from all accounts & log in again
+  // logout();
+  // login();
 
-  // wip
-  // const loggedOut = logout();
-  // if (loggedOut) return;
+  // Ask the user what does he want to do
+  // const standaloneMode = await askStandaloneMode();
+  const standaloneMode: StandaloneMode = 'auto';
 
-  // Ask for the mode
-  // const mode = await askMode();
-  // if (!mode) {
-  //   welcomeUser();
-  //   console.log('Exited.');
-  //   return;
-  // }
-  // const mode2 = await askMode();
+  welcomeUser();
+  console.log('[🔧] Modo de operação: ' + chalk.yellow('Standalone'));
+  console.log(
+    '[🔧] Modo secundário: ' +
+      chalk.cyan(standaloneMode === 'auto' ? 'Automático' : 'Manual')
+  );
+  console.log('[🔧] Quantidade de chaves: ' + chalk.cyan(KEYS_QUANTITY) + '\n');
+
+  // Create the project
+  createProject();
+  console.log('saiiiiiii');
 }
 
 main();
