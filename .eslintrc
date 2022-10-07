@@ -15,7 +15,7 @@
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-empty-function": "off",
     "indent": "off",
-    "prettier/prettier": "warn"
+    "prettier/prettier": ["warn", { "endOfLine": "auto" }]
   },
   "ignorePatterns": ["**/node_modules/**", "*.js"]
 }
