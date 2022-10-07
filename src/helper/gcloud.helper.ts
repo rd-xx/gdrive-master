@@ -1,6 +1,11 @@
 // import { handleError } from './stdout.helper';
 import { execSync } from 'child_process';
 
+/**
+ * Check if gcloud CLI is installed on the host machine.
+ *
+ * @returns Nothing.
+ */
 export function isGcloudInstalled() {
   try {
     execSync('gcloud --version', { stdio: 'ignore' });
