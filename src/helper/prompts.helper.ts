@@ -22,3 +22,13 @@ export async function askStandaloneMode(): Promise<StandaloneMode> {
 
   return response.mode;
 }
+
+export async function askKeysQuantity(): Promise<number> {
+  const response = await prompts({
+    type: 'number',
+    name: 'quantity',
+    message: 'Quantas chaves você deseja criar?'
+  });
+
+  return response.quantity;
+}
