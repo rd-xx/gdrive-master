@@ -20,13 +20,18 @@ welcomeUser();
 
 async function main() {
   // Checking if gcloud is installed
-  console.log(i18n.__('gcloudCheck', chalk.cyan('gcloud CLI')));
+  console.log('[🔨] ' + i18n.__('gcloudCheck', chalk.cyan('gcloud CLI')));
   const hasGcloud = isGcloudInstalled();
   if (!hasGcloud) {
-    console.log(i18n.__('gcloudNotInstalled', chalk.cyan('gcloud CLI')));
+    console.log(
+      '[❌] ' + i18n.__('gcloudNotInstalled', chalk.cyan('gcloud CLI'))
+    );
     return;
   }
-  console.log(i18n.__('gcloudInstalled', chalk.cyan('gcloud CLI')) + '\n');
+  console.log(
+    '[🔨] ' + i18n.__('gcloudInstalled', chalk.cyan('gcloud CLI')) + '\n'
+  );
+
 
   // wip
   // const loggedOut = logout();
