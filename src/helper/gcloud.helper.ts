@@ -33,6 +33,16 @@ export function login() {
   }
 }
 
+/**
+ * Log out from all accounts.
+ *
+ * @returns Nothing.
+ */
+export function logout(): void {
+  spawnSync('gcloud', ['auth', 'revoke', '--all'], {
+    shell: true
+  });
+}
 
 //     if (error instanceof Error) {
 //       console.log(error.message);
