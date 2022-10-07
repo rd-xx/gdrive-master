@@ -2,4 +2,4 @@ export type Config = {
   complementsToken: string;
 };
 
-export type UsageMode = 'standalone' | 'autouploader';
+export type StandaloneMode = 'auto' | 'manual';
