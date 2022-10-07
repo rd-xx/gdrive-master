@@ -15,19 +15,24 @@ export function isGcloudInstalled() {
   }
 }
 
-// wip
-// export function logout(): boolean {
-//   const buf = '';
-//   try {
-//     // logout from all gcloud accounts (if any)
-//     const as = execSync('gcloud auth list', { stdio: 'pipe' });
-//     console.log(as.toString());
+/**
+ * Log in to the Google Cloud Platform. This will open a new browser window.
+ *
+ * @returns Nothing.
+ */
+export function login() {
+  const login = spawnSync('gcloud', ['auth', 'login'], {
+    shell: true
+  });
+  console.log(login.stdout.toString());
+  console.log(login.stderr.toString());
 
-//     return true;
-//   } catch (error) {
-//     console.log('tou aqui');
-//     console.log(buf);
-//     console.log('"\n');
+  if (login.error) {
+    console.log(login.error);
+    return;
+  }
+}
+
 
 //     if (error instanceof Error) {
 //       console.log(error.message);
