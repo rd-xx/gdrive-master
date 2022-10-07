@@ -1,5 +1,5 @@
-// import { handleError } from './stdout.helper';
-import { execSync } from 'child_process';
+import { execSync, spawnSync } from 'child_process';
+import { PROJECT_NAME } from '../utils/constants';
 
 /**
  * Check if gcloud CLI is installed on the host machine.
