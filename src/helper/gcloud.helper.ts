@@ -47,23 +47,27 @@ export function logout(): void {
 /**
  * Create a new project on the Google Cloud Platform.
  *
- * @returns Nothing.
+ * @returns Project Id as a string.
  */
-export function createProject(): void {
-  let created = false;
+export function createProject(): string {
+  let created = false,
+    projectId = '';
+
   while (!created) {
-    const randomNumber = Math.floor(Math.random() * (10000 - 0 + 1) + 0),
-      projectId = `${PROJECT_NAME.toLowerCase()}-${randomNumber}`,
-      cmd = spawnSync(
-        'gcloud',
-        ['projects', 'create', projectId, '--name', PROJECT_NAME],
-        {
-          shell: true
-        }
-      );
+    const randomNumber = Math.floor(Math.random() * (10000 - 0 + 1) + 0);
+    projectId = `${PROJECT_NAME.toLowerCase()}-${randomNumber}`;
+    const cmd = spawnSync(
+      'gcloud',
+      ['projects', 'create', projectId, '--name', PROJECT_NAME],
+      {
+        shell: true
+      }
+    );
 
     if (!cmd.stderr.toString().includes('already exists')) created = true;
   }
+
+  return projectId;
 }
 
 export function createKey(): void {

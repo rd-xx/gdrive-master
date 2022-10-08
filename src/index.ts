@@ -56,7 +56,7 @@ async function main() {
   );
 
   // Create the project
-  createProject();
+  const projectId = createProject();
   console.log('saiiiiiii');
 }
 
