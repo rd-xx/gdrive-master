@@ -43,12 +43,12 @@ async function main() {
   const standaloneMode: StandaloneMode = 'auto';
 
   welcomeUser();
-  console.log('[🔧] Modo de operação: ' + chalk.yellow('Standalone'));
+  console.log('[🔩] Modo de operação: ' + chalk.yellow('Standalone'));
   console.log(
-    '[🔧] Modo secundário: ' +
+    '[⚙️] Modo secundário: ' +
       chalk.cyan(standaloneMode === 'auto' ? 'Automático' : 'Manual')
   );
-  console.log('[🔧] Quantidade de chaves: ' + chalk.cyan(KEYS_QUANTITY) + '\n');
+  console.log('[⚙️] Quantidade de chaves: ' + chalk.cyan(KEYS_QUANTITY) + '\n');
 
   // Create the project
   createProject();
