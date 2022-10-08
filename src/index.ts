@@ -1,9 +1,18 @@
-import { askProjectId, askWorkingMode } from './helper/prompts.helper';
+import {
+  askProjectCreation,
+  askProjectId,
+  askWorkingMode
+} from './helper/prompts.helper';
 import { welcomeUser } from './helper/stdout.helper';
 import { KEYS_QUANTITY } from './utils/constants';
 import { join, normalize } from 'path';
 import i18n from 'i18n';
 import chalk from 'chalk';
+import {
+  createProject,
+  isGcloudInstalled,
+  setProject
+} from './helper/gcloud.helper';
 
 // Setup i18n
 i18n.configure({
@@ -38,8 +47,7 @@ async function main() {
   // login();
 
   // Ask the user what does he want to do
-  // const workingMode = await askWorkingMode();
-  const workingMode: WorkingMode = 'auto';
+  const workingMode = await askWorkingMode();
 
   welcomeUser();
   console.log(
@@ -67,10 +75,27 @@ async function main() {
     let projectId = '';
 
     const shouldCreateNewProject = await askProjectCreation();
+    if (shouldCreateNewProject) {
+      projectId = createProject() || '';
+      if (!projectId) return;
+    } else {
+      let isProjectIdValid = false;
+
+      while (!isProjectIdValid) {
+        const projectId = await askProjectId(),
+          settedProject = setProject(projectId);
+
+        if (settedProject) isProjectIdValid = true;
+        else console.log('[❌]', i18n.__('prompts.project.id.invalid') + '\n');
+      }
+    }
+
+    setProject(projectId);
   }
+
   // Create the project
-  const projectId = createProject();
-  console.log('saiiiiiii');
+  // const projectId = createProject();
+  // console.log('saiiiiiii');
 }
 
 main();

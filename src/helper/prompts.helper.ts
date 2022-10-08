@@ -46,6 +46,26 @@ export async function askProjectCreation(): Promise<boolean> {
   return response.create;
 }
 
+/**
+ * Asks the user for the project Id.
+ *
+ * @returns Project Id as a string.
+ */
+export async function askProjectId(): Promise<string> {
+  const response = await prompts({
+    type: 'text',
+    name: 'id',
+    message: i18n.__('prompts.project.id.message')
+  });
+
+  return response.id;
+}
+
+/**
+ * Asks the user how many keys he wants to create.
+ *
+ * @returns Number of keys to generate.
+ */
 export async function askKeysQuantity(): Promise<number> {
   const response = await prompts({
     type: 'number',
