@@ -1,7 +1,7 @@
-import { StandaloneMode } from '../types/miscellaneous.types';
+import { WorkingMode } from '../types/miscellaneous.types';
 import prompts from 'prompts';
 
-export async function askStandaloneMode(): Promise<StandaloneMode> {
+export async function askWorkingMode(): Promise<WorkingMode> {
   const response = await prompts({
     type: 'select',
     choices: [

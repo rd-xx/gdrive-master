@@ -39,8 +39,8 @@ async function main() {
   // login();
 
   // Ask the user what does he want to do
-  // const standaloneMode = await askStandaloneMode();
-  const standaloneMode: StandaloneMode = 'auto';
+  // const workingMode = await askWorkingMode();
+  const workingMode: WorkingMode = 'auto';
 
   welcomeUser();
   console.log('[🔩] Modo de operação: ' + chalk.yellow('Standalone'));
