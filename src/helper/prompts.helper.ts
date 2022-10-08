@@ -30,6 +30,22 @@ export async function askWorkingMode(): Promise<WorkingMode> {
   return response.mode;
 }
 
+/**
+ * Asks the user if he wants to create a new project.
+ * If not, we should ask him for the project Id.
+ *
+ * @returns True if he wants to create project, false if not.
+ */
+export async function askProjectCreation(): Promise<boolean> {
+  const response = await prompts({
+    type: 'confirm',
+    name: 'create',
+    message: i18n.__('prompts.project.message')
+  });
+
+  return response.create;
+}
+
 export async function askKeysQuantity(): Promise<number> {
   const response = await prompts({
     type: 'number',

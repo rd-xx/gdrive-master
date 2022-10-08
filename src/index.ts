@@ -58,6 +58,16 @@ async function main() {
     chalk.cyan(KEYS_QUANTITY) + '\n'
   );
 
+  // Set the working project on glcoud
+  if (workingMode === 'auto') {
+    const projectId = createProject();
+    if (!projectId) return;
+    setProject(projectId);
+  } else {
+    let projectId = '';
+
+    const shouldCreateNewProject = await askProjectCreation();
+  }
   // Create the project
   const projectId = createProject();
   console.log('saiiiiiii');
