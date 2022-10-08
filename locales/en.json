@@ -1,8 +1,17 @@
 {
+  "promptsWorkingModeMessage": "Which working mode do you want to use?",
+  "promptsWorkingModeAutoDescription": "Creates a project and 100 keys automatically.",
+  "promptsWorkingModeManualDescription": "Asks you what to do step by step.",
+  "promptsKeysMessage": "How many keys do you want to create?",
   "gcloudCheck": "Checking if %s is installed...",
   "gcloudInstalled": "%s detected. Proceeding.",
   "gcloudNotInstalled": "Seems like you don't have %s installed. Please install it and try again.",
   "errorUnexpected": "An unexpected error occured.",
   "errorStacktrace": "The stacktrace has been saved to %s. Please report this issue to rdx.",
-  "errorNoStacktrace": "The stacktrace could not be saved."
+  "errorNoStacktrace": "The stacktrace could not be saved.",
+  "settingsOperatingMode": "Operating mode: ",
+  "settingsWorkingMode": "Working mode: ",
+  "settingsKeys": "Quantity of keys: ",
+  "workingModeAuto": "Auto",
+  "workingModeManual": "Manual"
 }

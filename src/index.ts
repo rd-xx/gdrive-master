@@ -1,10 +1,10 @@
 import { createProject, isGcloudInstalled } from './helper/gcloud.helper';
+import { WorkingMode } from './types/miscellaneous.types';
 import { welcomeUser } from './helper/stdout.helper';
+import { KEYS_QUANTITY } from './utils/constants';
 import { join, normalize } from 'path';
 import { I18n } from 'i18n';
 import chalk from 'chalk';
-import { StandaloneMode } from './types/miscellaneous.types';
-import { KEYS_QUANTITY } from './utils/constants';
 
 // Setup i18n
 const i18n = new I18n({
@@ -43,12 +43,17 @@ async function main() {
   const workingMode: WorkingMode = 'auto';
 
   welcomeUser();
-  console.log('[🔩] Modo de operação: ' + chalk.yellow('Standalone'));
   console.log(
-    '[⚙️] Modo secundário: ' +
-      chalk.cyan(standaloneMode === 'auto' ? 'Automático' : 'Manual')
+    '[🔩] ' + i18n.__('settingsOperatingMode') + chalk.yellow('Standalone')
   );
-  console.log('[⚙️] Quantidade de chaves: ' + chalk.cyan(KEYS_QUANTITY) + '\n');
+  console.log(
+    '[⚙️] ' +
+      i18n.__('settingsWorkingMode') +
+      i18n.__('workingMode' + (workingMode === 'auto' ? 'Auto' : 'Manual'))
+  );
+  console.log(
+    '[⚙️] ' + i18n.__('settingsKeys') + chalk.cyan(KEYS_QUANTITY) + '\n'
+  );
 
   // Create the project
   createProject();

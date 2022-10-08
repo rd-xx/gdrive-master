@@ -1,23 +1,24 @@
 import { WorkingMode } from '../types/miscellaneous.types';
 import prompts from 'prompts';
+import i18n from 'i18n';
 
 export async function askWorkingMode(): Promise<WorkingMode> {
   const response = await prompts({
     type: 'select',
     choices: [
       {
-        title: 'Automático',
-        value: 'standalone',
-        description: 'Cria o projeto e 100 chaves automaticamente.'
+        title: i18n.__('workingModeAuto'),
+        value: 'auto',
+        description: i18n.__('workingModeAutoDescription')
       },
       {
-        title: 'Manual',
-        value: 'autouploader',
-        description: 'Pergunta o que fazer a cada etapa.'
+        title: i18n.__('workingModeManual'),
+        value: 'manual',
+        description: i18n.__('workingModeManualDescription')
       }
     ],
     name: 'mode',
-    message: 'Qual modo você deseja utilizar?'
+    message: i18n.__('workingModeQuestion')
   });
 
   return response.mode;
@@ -27,7 +28,7 @@ export async function askKeysQuantity(): Promise<number> {
   const response = await prompts({
     type: 'number',
     name: 'quantity',
-    message: 'Quantas chaves você deseja criar?'
+    message: i18n.__('promptsKeysMessage')
   });
 
   return response.quantity;
