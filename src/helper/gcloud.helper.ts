@@ -1,5 +1,6 @@
 import { execSync, spawnSync } from 'child_process';
 import { PROJECT_NAME } from '../utils/constants';
+import i18n from 'i18n';
 
 /**
  * Check if gcloud CLI is installed on the host machine.
@@ -79,4 +80,13 @@ export function createKey(): void {
   spawnSync('gcloud', ['iam', 'service-accounts', 'keys', 'create'], {
     shell: true
   });
+}
+
+export function setProject(projectId: string): boolean {
+  const cmd = spawnSync('gcloud', ['config', 'set', 'project', projectId], {
+    shell: true,
+    input: 'n'
+  });
+
+  return cmd.stderr.toString().includes('Updated property');
 }
