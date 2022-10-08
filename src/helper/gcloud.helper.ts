@@ -47,9 +47,9 @@ export function logout(): void {
 /**
  * Create a new project on the Google Cloud Platform.
  *
- * @returns Project Id as a string.
+ * @returns Project Id as a string, or nothing if the project creation failed.
  */
-export function createProject(): string {
+export function createProject(): string | void {
   let created = false,
     projectId = '';
 
@@ -64,7 +64,12 @@ export function createProject(): string {
       }
     );
 
-    if (!cmd.stderr.toString().includes('already exists')) created = true;
+    if (cmd.stderr.toString().includes('project quota')) {
+      console.log('[❌]', i18n.__('gcloud.projectQuotaExceeded'));
+      return;
+    }
+
+    created = cmd.stderr.toString().includes('already exists');
   }
 
   return projectId;
