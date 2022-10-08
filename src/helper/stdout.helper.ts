@@ -8,12 +8,12 @@ export function welcomeUser(): void {
 }
 
 export function handleError(stacktrace: string): void {
-  console.log(chalk.red.bold(i18n.__('errorUnexpected')));
-  console.log(i18n.__('errorStacktrace'));
+  console.log(chalk.red.bold(i18n.__('errors.unexpected')));
+  console.log(i18n.__('errors.stacktrace'));
 
   writeFile('stacktrace.txt', stacktrace, (err) => {
     if (err) {
-      console.log(i18n.__('errorNoStacktrace'));
+      console.log(i18n.__('errors.noStacktrace'));
       console.log(stacktrace);
       console.log('\n');
       console.log(err);

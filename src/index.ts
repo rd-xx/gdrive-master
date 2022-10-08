@@ -1,5 +1,4 @@
-import { createProject, isGcloudInstalled } from './helper/gcloud.helper';
-import { WorkingMode } from './types/miscellaneous.types';
+import { askProjectId, askWorkingMode } from './helper/prompts.helper';
 import { welcomeUser } from './helper/stdout.helper';
 import { KEYS_QUANTITY } from './utils/constants';
 import { join, normalize } from 'path';
@@ -21,19 +20,20 @@ welcomeUser();
 
 async function main() {
   // Checking if gcloud is installed
-  console.log('[🔨] ' + i18n.__('gcloudCheck', chalk.cyan('gcloud CLI')));
+  console.log('[🔨]', i18n.__('gcloud.check', chalk.cyan('gcloud CLI')));
   const hasGcloud = isGcloudInstalled();
   if (!hasGcloud) {
     console.log(
-      '[❌] ' + i18n.__('gcloudNotInstalled', chalk.cyan('gcloud CLI'))
+      '[❌]',
+      i18n.__('gcloud.notInstalled', chalk.cyan('gcloud CLI'))
     );
     return;
   }
   console.log(
-    '[🔨] ' + i18n.__('gcloudInstalled', chalk.cyan('gcloud CLI')) + '\n'
+    '[🔨]',
+    i18n.__('gcloud.installed', chalk.cyan('gcloud CLI')) + '\n'
   );
 
-  // Log out from all accounts & log in again
   // logout();
   // login();
 
@@ -43,15 +43,19 @@ async function main() {
 
   welcomeUser();
   console.log(
-    '[🔩] ' + i18n.__('settingsOperatingMode') + chalk.yellow('Standalone')
+    '[🔩]',
+    i18n.__('settings.operatingMode'),
+    chalk.yellow('Standalone')
   );
   console.log(
-    '[⚙️] ' +
-      i18n.__('settingsWorkingMode') +
-      i18n.__('workingMode' + (workingMode === 'auto' ? 'Auto' : 'Manual'))
+    '[⚙️]',
+    i18n.__('settings.workingMode'),
+    i18n.__('workingMode' + (workingMode === 'auto' ? 'Auto' : 'Manual'))
   );
   console.log(
-    '[⚙️] ' + i18n.__('settingsKeys') + chalk.cyan(KEYS_QUANTITY) + '\n'
+    '[⚙️] ',
+    i18n.__('settings.keys'),
+    chalk.cyan(KEYS_QUANTITY) + '\n'
   );
 
   // Create the project
