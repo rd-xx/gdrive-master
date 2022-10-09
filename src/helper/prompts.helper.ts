@@ -1,4 +1,5 @@
 import { WorkingMode } from '../types/miscellaneous.types';
+import { setProject } from './gcloud.helper';
 import prompts from 'prompts';
 import i18n from 'i18n';
 
@@ -55,7 +56,12 @@ export async function askProjectId(): Promise<string | undefined> {
   const response = await prompts({
     type: 'text',
     name: 'id',
-    message: i18n.__('prompts.project.id.message')
+    message: i18n.__('prompts.project.id.message'),
+    validate: async (value: string) => {
+      const settedProject = await setProject(value);
+      if (settedProject) return true;
+      else return i18n.__('prompts.project.id.invalid');
+    }
   });
 
   return response.id;
@@ -70,7 +76,11 @@ export async function askKeysQuantity(): Promise<number | undefined> {
   const response = await prompts({
     type: 'number',
     name: 'quantity',
-    message: i18n.__('prompts.keys.message')
+    message: i18n.__('prompts.keys.message'),
+    validate: (value: number) => {
+      if (value > 0) return true;
+      else return i18n.__('prompts.keys.notPositive');
+    }
   });
 
   return response.quantity;

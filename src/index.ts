@@ -63,17 +63,7 @@ async function main() {
       const projectId = createProject() || '';
       if (!projectId) return;
       setProject(projectId);
-    } else {
-      let isProjectIdValid = false;
-
-      while (!isProjectIdValid) {
-        const projectId = await askProjectId(),
-          settedProject = setProject(projectId);
-
-        if (settedProject) isProjectIdValid = true;
-        else console.log('[❌]', i18n.__('prompts.project.id.invalid') + '\n');
-      }
-    }
+    } else await askProjectId();
   }
 
   // Create the project
