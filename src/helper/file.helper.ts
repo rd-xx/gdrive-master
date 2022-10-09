@@ -1,15 +1,12 @@
 import { handleError } from './stdout.helper.js';
-import { dirname, join, normalize } from 'path';
 import { readdir, writeFile } from 'fs';
-import { fileURLToPath } from 'url';
+import { join, normalize } from 'path';
 
 export async function saveKeys(
   email: string,
   keys: string[]
 ): Promise<string | null> {
-  const __filename = fileURLToPath(import.meta.url),
-    __dirname = dirname(__filename),
-    rootDirectory = normalize(join(__dirname, '..', '..'));
+  const rootDirectory = normalize(join(process.cwd(), '..', '..'));
 
   return new Promise((resolve, reject) => {
     readdir(rootDirectory, (errRead, files) => {

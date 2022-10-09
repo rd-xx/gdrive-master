@@ -1,8 +1,7 @@
 import { OperatingMode } from './types/miscellaneous.types.js';
 import { KEYS_QUANTITY } from './utils/constants.js';
 import { saveKeys } from './helper/file.helper.js';
-import { dirname, join, normalize } from 'path';
-import { fileURLToPath } from 'url';
+import { join, normalize } from 'path';
 import { oraPromise } from 'ora';
 import chalk from 'chalk';
 import i18n from 'i18n';
@@ -28,15 +27,12 @@ import {
   exit
 } from './helper/stdout.helper.js';
 
-const __filename = fileURLToPath(import.meta.url),
-  __dirname = dirname(__filename);
-
 // Setup i18n
 i18n.configure({
   locales: ['en', 'fr', 'pt'],
   defaultLocale: 'en',
   fallbacks: { 'fr-*': 'fr', 'pt-*': 'pt' },
-  directory: normalize(join(__dirname, '..', 'locales')),
+  directory: normalize(join(process.cwd(), 'locales')),
   objectNotation: true
 });
 i18n.setLocale(Intl.DateTimeFormat().resolvedOptions().locale);
