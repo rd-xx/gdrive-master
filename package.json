@@ -1,7 +1,7 @@
 {
   "name": "gdrive-master",
   "version": "0.0.1",
-  "description": "Create Google Drive account services and keys easily.",
+  "description": "Create Google Drive keys easily.",
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "type": "module",
