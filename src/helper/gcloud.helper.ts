@@ -101,3 +101,13 @@ export function enableDriveApi(): void {
     shell: true
   });
 }
+
+export function createServiceAccount(): void {
+  spawnSync(
+    'gcloud',
+    ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
+    {
+      shell: true
+    }
+  );
+}
