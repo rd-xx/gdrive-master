@@ -84,8 +84,7 @@ export function createKey(): void {
 
 export function setProject(projectId: string): boolean {
   const cmd = spawnSync('gcloud', ['config', 'set', 'project', projectId], {
-    shell: true,
-    input: 'n'
+    shell: true
   });
 
   return cmd.stderr.toString().includes('Updated property');

@@ -62,6 +62,7 @@ async function main() {
     if (shouldCreateNewProject) {
       projectId = createProject() || '';
       if (!projectId) return;
+      setProject(projectId);
     } else {
       let isProjectIdValid = false;
 
@@ -73,8 +74,6 @@ async function main() {
         else console.log('[❌]', i18n.__('prompts.project.id.invalid') + '\n');
       }
     }
-
-    setProject(projectId);
   }
 
   // Create the project
