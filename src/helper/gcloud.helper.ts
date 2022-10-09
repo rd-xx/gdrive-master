@@ -1,4 +1,4 @@
-import { execSync, spawnSync } from 'child_process';
+import { execSync, spawn, spawnSync } from 'child_process';
 import { PROJECT_NAME } from '../utils/constants';
 import i18n from 'i18n';
 
@@ -82,10 +82,15 @@ export function createKey(): void {
   });
 }
 
-export function setProject(projectId: string): boolean {
-  const cmd = spawnSync('gcloud', ['config', 'set', 'project', projectId], {
-    shell: true
-  });
+export async function setProject(projectId: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    const cmd = spawn('gcloud', ['config', 'set', 'project', projectId], {
+      shell: true
+    });
 
-  return cmd.stderr.toString().includes('Updated property');
+    cmd.stderr.on('data', (data) => {
+      if (String(data).includes('does not exist')) return resolve(false);
+      else if (String(data).includes('Updated property')) return resolve(true);
+    });
+  });
 }
