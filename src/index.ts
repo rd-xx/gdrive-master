@@ -30,20 +30,19 @@ welcomeUser();
 
 async function main() {
   // Checking if gcloud is installed
-  console.log('[🔨]', i18n.__('gcloud.check', chalk.cyan('gcloud CLI')));
-  const hasGcloud = isGcloudInstalled();
-  if (!hasGcloud) {
-    console.log(
-      '[❌]',
-      i18n.__('gcloud.notInstalled', chalk.cyan('gcloud CLI'))
-    );
-    return;
-  }
-  console.log(
-    '[🔨]',
-    i18n.__('gcloud.installed', chalk.cyan('gcloud CLI')) + '\n'
-  );
-
+  await oraPromise(isGcloudInstalled(), {
+    text: `[🔨] ${i18n.__('gcloud.check', chalk.cyan('gcloud CLI'))}`,
+    successText: `[✅] ${i18n.__(
+      'gcloud.installed',
+      chalk.cyan('gcloud CLI')
+    )}`,
+    failText: `[❌] ${i18n.__(
+      'gcloud.notInstalled',
+      chalk.cyan('gcloud CLI')
+    )}`,
+    interval: 400
+  });
+  // ora.succeed();
   // logout();
   // login();
 
