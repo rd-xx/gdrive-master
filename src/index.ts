@@ -34,7 +34,9 @@ i18n.configure({
   locales: ['en', 'fr', 'pt'],
   defaultLocale: 'en',
   fallbacks: { 'fr-*': 'fr', 'pt-*': 'pt' },
-  directory: join(dirname(dirname(process.argv[1])), 'locales'),
+  directory: process.argv[1].includes('snapshot')
+    ? join(dirname(dirname(process.argv[1])), 'locales')
+    : join(process.cwd(), 'locales'),
   objectNotation: true
 });
 i18n.setLocale(Intl.DateTimeFormat().resolvedOptions().locale);
