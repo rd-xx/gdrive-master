@@ -41,10 +41,10 @@ i18n.configure({
 });
 i18n.setLocale(Intl.DateTimeFormat().resolvedOptions().locale);
 
-// Print the project name + version
-await welcomeUser();
-
 async function main() {
+  // Print the project name + version
+  await welcomeUser();
+
   // Checking if gcloud is installed
   await oraPromise(isGcloudInstalled(), {
     text: `] ${i18n.__('gcloud.checking', chalk.cyan('gcloud CLI'))}`,
