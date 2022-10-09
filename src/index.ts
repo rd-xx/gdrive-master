@@ -1,6 +1,9 @@
 import { printSettings, welcomeUser } from './helper/stdout.helper.js';
 import { OperatingMode } from './types/miscellaneous.types.js';
 import { KEYS_QUANTITY } from './utils/constants.js';
+import { dirname, join, normalize } from 'path';
+import { fileURLToPath } from 'url';
+import { oraPromise } from 'ora';
 import chalk from 'chalk';
 import i18n from 'i18n';
 import {
@@ -15,6 +18,9 @@ import {
   createProject,
   setProject
 } from './helper/gcloud.helper.js';
+
+const __filename = fileURLToPath(import.meta.url),
+  __dirname = dirname(__filename);
 
 // Setup i18n
 i18n.configure({
