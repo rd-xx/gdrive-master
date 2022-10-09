@@ -5,13 +5,15 @@ import i18n from 'i18n';
 import {
   askProjectCreation,
   askWorkingMode,
-  askProjectId
+  askProjectId,
+  askKeysQuantity
 } from './helper/prompts.helper';
 import {
   isGcloudInstalled,
   createProject,
   setProject
 } from './helper/gcloud.helper';
+import { KEYS_QUANTITY } from './utils/constants';
 
 // Setup i18n
 i18n.configure({
@@ -65,6 +67,10 @@ async function main() {
       setProject(projectId);
     } else await askProjectId();
   }
+
+  const keysQuantity =
+    workingMode === 'auto' ? KEYS_QUANTITY : await askKeysQuantity();
+  if (!keysQuantity) return;
 
   // Create the project
   // const projectId = createProject();
