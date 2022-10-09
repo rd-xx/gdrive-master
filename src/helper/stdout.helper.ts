@@ -1,11 +1,12 @@
 import { OperatingMode, WorkingMode } from '../types/miscellaneous.types.js';
+import { version } from '../../package.json';
 import { writeFile } from 'fs';
 import chalk from 'chalk';
 import i18n from 'i18n';
 
 export function welcomeUser(): void {
   console.clear();
-  console.log(chalk.gray.bold('gdrive-master » 0.0.1') + '\n');
+  console.log(chalk.gray.bold('gdrive-master »', version) + '\n');
 }
 
 export function printSettings(
