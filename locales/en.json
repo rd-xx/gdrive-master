@@ -16,7 +16,7 @@
       "message": "How many keys do you want to create?",
       "notPositive": "Please enter a positive number.",
       "save": {
-        "message": "Do you want to save the keys in a new file?",
+        "message": "Do you want to save the created keys in a new file?",
         "saved": "The keys have been successfully saved in the file \"%s\"."
       }
     },

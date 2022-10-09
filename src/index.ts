@@ -81,6 +81,9 @@ async function main() {
     workingMode === 'auto' ? KEYS_QUANTITY : await askKeysQuantity();
   if (!keysQuantity) return;
 
+  const shouldSave = await askSaveKeys();
+  if (shouldSave === undefined) return;
+
   await welcomeUser();
   printSettings(operatingMode, workingMode, keysQuantity);
 
@@ -107,12 +110,10 @@ async function main() {
     if (output.startsWith('AIza')) keys.push(output);
     else return handleError(output);
   }
-  console.log(i18n.__('gcloud.keys.done') + '\n');
+  console.log(i18n.__('gcloud.keys.done'));
 
   // Save the keys
-  const shouldSave = await askSaveKeys();
-  if (shouldSave === undefined) return;
-  else if (shouldSave) {
+  if (shouldSave) {
     const email = getEmail(),
       fileName = await saveKeys(email, keys);
     if (!fileName) return;
