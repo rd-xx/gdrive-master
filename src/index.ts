@@ -1,3 +1,4 @@
+import { printSettings, welcomeUser } from './helper/stdout.helper';
 import { join, normalize } from 'path';
 import chalk from 'chalk';
 import i18n from 'i18n';
@@ -44,25 +45,10 @@ async function main() {
   // logout();
   // login();
 
-  // Ask the user what does he want to do
+  // Ask the user what which working mode he wants to use
   const workingMode = await askWorkingMode();
-
   welcomeUser();
-  console.log(
-    '[🔩]',
-    i18n.__('settings.operatingMode'),
-    chalk.yellow('Standalone')
-  );
-  console.log(
-    '[⚙️]',
-    i18n.__('settings.workingMode'),
-    i18n.__('workingMode' + (workingMode === 'auto' ? 'Auto' : 'Manual'))
-  );
-  console.log(
-    '[⚙️] ',
-    i18n.__('settings.keys'),
-    chalk.cyan(KEYS_QUANTITY) + '\n'
-  );
+  printSettings(workingMode);
 
   // Set the working project on glcoud
   if (workingMode === 'auto') {
