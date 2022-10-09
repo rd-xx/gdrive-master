@@ -11,10 +11,7 @@ export async function isGcloudInstalled(): Promise<boolean> {
   return new Promise((resolve) => {
     try {
       execSync('gcloud --version', { stdio: 'ignore' });
-      setTimeout(() => {
-        resolve(true);
-      }, 3000);
-      // return resolve(true);
+      return resolve(true);
     } catch (error) {
       return resolve(false);
     }
