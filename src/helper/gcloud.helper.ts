@@ -88,9 +88,20 @@ export function createServiceAccount(): void {
   );
 }
 
-export function createKey(): void {
-  spawnSync('gcloud', ['iam', 'service-accounts', 'keys', 'create'], {
-    shell: true
+export async function createKey(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const cmd = spawn('gcloud', ['alpha', 'services', 'api-keys', 'create'], {
+      shell: true
+    });
+
+    cmd.stderr.on('data', (data) => {
+      if (data.toString().includes('Result:')) {
+        const key = JSON.parse(
+          data.toString().split('Result: ')[1].replace(/\n/g, '')
+        ).keyString;
+        return resolve(key);
+      } else return reject(data.toString());
+    });
   });
 }
 
