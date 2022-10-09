@@ -18,7 +18,9 @@ import {
   createProject,
   setProject,
   createKey,
-  getEmail
+  getEmail,
+  logout,
+  login
 } from './helper/gcloud.helper.js';
 import {
   printSettings,
@@ -48,9 +50,9 @@ async function main() {
     failText: `] ${i18n.__('gcloud.notInstalled', chalk.cyan('gcloud CLI'))}`,
     prefixText: '['
   });
-  // ora.succeed();
-  // logout();
-  // login();
+
+  logout();
+  login();
 
   // Ask the user what which working mode he wants to use
   const operatingMode: OperatingMode = 'standalone',
