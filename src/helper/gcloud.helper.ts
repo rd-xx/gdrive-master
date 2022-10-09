@@ -78,6 +78,16 @@ export function createProject(): string | void {
   return projectId;
 }
 
+export function createServiceAccount(): void {
+  spawnSync(
+    'gcloud',
+    ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
+    {
+      shell: true
+    }
+  );
+}
+
 export function createKey(): void {
   spawnSync('gcloud', ['iam', 'service-accounts', 'keys', 'create'], {
     shell: true
