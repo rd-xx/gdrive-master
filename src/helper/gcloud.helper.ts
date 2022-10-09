@@ -1,5 +1,5 @@
-import { PROJECT_NAME, SERVICE_ACCOUNT_NAME } from '../utils/constants.js';
 import { execSync, spawn, spawnSync } from 'child_process';
+import { PROJECT_NAME } from '../utils/constants.js';
 import i18n from 'i18n';
 
 /**
@@ -11,7 +11,10 @@ export async function isGcloudInstalled(): Promise<boolean> {
   return new Promise((resolve) => {
     try {
       execSync('gcloud --version', { stdio: 'ignore' });
-      return resolve(true);
+      setTimeout(() => {
+        resolve(true);
+      }, 3000);
+      // return resolve(true);
     } catch (error) {
       return resolve(false);
     }
@@ -78,15 +81,18 @@ export function createProject(): string | void {
   return projectId;
 }
 
-// export function createServiceAccount(): void {
-//   spawnSync(
-//     'gcloud',
-//     ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
-//     {
-//       shell: true
-//     }
-//   );
-// }
+export async function setProject(projectId: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    const cmd = spawn('gcloud', ['config', 'set', 'project', projectId], {
+      shell: true
+    });
+
+    cmd.stderr.on('data', (data) => {
+      if (String(data).includes('does not exist')) return resolve(false);
+      else if (String(data).includes('Updated property')) return resolve(true);
+    });
+  });
+}
 
 export async function createKey(): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -105,18 +111,15 @@ export async function createKey(): Promise<string> {
   });
 }
 
-export async function setProject(projectId: string): Promise<boolean> {
-  return new Promise((resolve) => {
-    const cmd = spawn('gcloud', ['config', 'set', 'project', projectId], {
-      shell: true
-    });
-
-    cmd.stderr.on('data', (data) => {
-      if (String(data).includes('does not exist')) return resolve(false);
-      else if (String(data).includes('Updated property')) return resolve(true);
-    });
-  });
-}
+// export function createServiceAccount(): void {
+//   spawnSync(
+//     'gcloud',
+//     ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
+//     {
+//       shell: true
+//     }
+//   );
+// }
 
 // export function getServiceAccount(): string | null {
 //   const cmd = spawnSync('gcloud', ['iam', 'service-accounts', 'list'], {
