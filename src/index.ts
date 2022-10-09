@@ -1,16 +1,14 @@
+import { join, normalize } from 'path';
+import chalk from 'chalk';
+import i18n from 'i18n';
 import {
   askProjectCreation,
-  askProjectId,
-  askWorkingMode
+  askWorkingMode,
+  askProjectId
 } from './helper/prompts.helper';
-import { welcomeUser } from './helper/stdout.helper';
-import { KEYS_QUANTITY } from './utils/constants';
-import { join, normalize } from 'path';
-import i18n from 'i18n';
-import chalk from 'chalk';
 import {
-  createProject,
   isGcloudInstalled,
+  createProject,
   setProject
 } from './helper/gcloud.helper';
 

@@ -1,6 +1,6 @@
 import { writeFile } from 'fs-extra';
-import i18n from 'i18n';
 import chalk from 'chalk';
+import i18n from 'i18n';
 
 export function welcomeUser(): void {
   console.clear();
