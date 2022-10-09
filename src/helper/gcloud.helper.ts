@@ -124,18 +124,16 @@ export function getServiceAccount(): string | null {
   return email[0];
 }
 
-export function enableDriveApi(): void {
-  spawnSync('gcloud', ['services', 'enable', 'drive.googleapis.com'], {
-    shell: true
-  });
-}
+export async function enableDriveApi(): Promise<void> {
+  return new Promise((resolve) => {
+    const cmd = spawn(
+      'gcloud',
+      ['services', 'enable', 'drive.googleapis.com'],
+      {
+        shell: true
+      }
+    );
 
-export function createServiceAccount(): void {
-  spawnSync(
-    'gcloud',
-    ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
-    {
-      shell: true
-    }
-  );
+    cmd.on('exit', () => resolve());
+  });
 }
