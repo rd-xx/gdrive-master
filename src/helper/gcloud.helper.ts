@@ -78,15 +78,15 @@ export function createProject(): string | void {
   return projectId;
 }
 
-export function createServiceAccount(): void {
-  spawnSync(
-    'gcloud',
-    ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
-    {
-      shell: true
-    }
-  );
-}
+// export function createServiceAccount(): void {
+//   spawnSync(
+//     'gcloud',
+//     ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
+//     {
+//       shell: true
+//     }
+//   );
+// }
 
 export async function createKey(): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -118,22 +118,22 @@ export async function setProject(projectId: string): Promise<boolean> {
   });
 }
 
-export function getServiceAccount(): string | null {
-  const cmd = spawnSync('gcloud', ['iam', 'service-accounts', 'list'], {
-    shell: true
-  });
+// export function getServiceAccount(): string | null {
+//   const cmd = spawnSync('gcloud', ['iam', 'service-accounts', 'list'], {
+//     shell: true
+//   });
 
-  if (cmd.stderr.toString().includes('0 items')) return null;
+//   if (cmd.stderr.toString().includes('0 items')) return null;
 
-  const wholeLine = cmd.stdout.toString().split('\n')[1],
-    email = wholeLine
-      .split(' ')
-      .filter((value) =>
-        new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(value)
-      );
+//   const wholeLine = cmd.stdout.toString().split('\n')[1],
+//     email = wholeLine
+//       .split(' ')
+//       .filter((value) =>
+//         new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(value)
+//       );
 
-  return email[0];
-}
+//   return email[0];
+// }
 
 export async function enableDriveApi(): Promise<void> {
   return new Promise((resolve) => {
