@@ -50,8 +50,6 @@ async function main() {
   // Ask the user what which working mode he wants to use
   const workingMode = await askWorkingMode();
   if (!workingMode) return;
-  welcomeUser();
-  printSettings(workingMode);
 
   // Set the working project on glcoud
   if (workingMode === 'auto') {
@@ -72,9 +70,8 @@ async function main() {
     workingMode === 'auto' ? KEYS_QUANTITY : await askKeysQuantity();
   if (!keysQuantity) return;
 
-  // Create the project
-  // const projectId = createProject();
-  // console.log('saiiiiiii');
+  welcomeUser();
+  printSettings(operatingMode, workingMode, keysQuantity);
 }
 
 main();

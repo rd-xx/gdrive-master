@@ -7,21 +7,29 @@ export function welcomeUser(): void {
   console.log(chalk.gray.bold('gdrive-master » 0.0.1') + '\n');
 }
 
-export function printSettings(workingMode: WorkingMode): void {
+export function printSettings(
+  operatingMode: OperatingMode,
+  workingMode: WorkingMode,
+  keysQuantity: number
+): void {
   console.log(
     '[🔩]',
     i18n.__('settings.operatingMode'),
-    chalk.yellow('Standalone')
+    chalk.yellow(
+      operatingMode === 'standalone' ? 'Standalone' : 'Auto-Uploader'
+    )
   );
   console.log(
     '[⚙️]',
     i18n.__('settings.workingMode'),
-    i18n.__('workingMode' + (workingMode === 'auto' ? 'Auto' : 'Manual'))
+    chalk.cyan(
+      i18n.__('workingMode' + (workingMode === 'auto' ? 'Auto' : 'Manual'))
+    )
   );
   console.log(
-    '[⚙️] ',
+    '[⚙️]',
     i18n.__('settings.keys'),
-    chalk.cyan(KEYS_QUANTITY) + '\n'
+    chalk.cyan(keysQuantity) + '\n'
   );
 }
 
