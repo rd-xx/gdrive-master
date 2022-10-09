@@ -85,3 +85,18 @@ export async function askKeysQuantity(): Promise<number | undefined> {
 
   return response.quantity;
 }
+
+/**
+ * Asks the user if he wants to create a new file with all the created keys.
+ *
+ * @returns True if the user wants to save the created keys in a new file, false if not or undefined if the user cancelled the operation.
+ */
+export async function askSaveKeys(): Promise<boolean | undefined> {
+  const response = await prompts({
+    type: 'confirm',
+    name: 'save',
+    message: i18n.__('prompts.keys.save.message')
+  });
+
+  return response.save;
+}

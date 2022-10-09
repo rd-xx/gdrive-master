@@ -101,6 +101,15 @@ async function main() {
     if (output.startsWith('AIza')) keys.push(output);
     else return handleError(output);
   }
+  // Save the keys
+  const shouldSave = await askSaveKeys();
+  if (shouldSave === undefined) return;
+  else if (shouldSave) {
+    const email = getEmail(),
+      fileName = await saveKeys(email, keys);
+    if (!fileName) return;
+    console.log(i18n.__('prompts.keys.save.saved'), chalk.cyan(fileName));
+  }
 
   console.log(keys);
 }
