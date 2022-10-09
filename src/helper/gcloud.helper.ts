@@ -94,3 +94,10 @@ export async function setProject(projectId: string): Promise<boolean> {
     });
   });
 }
+
+
+export function enableDriveApi(): void {
+  spawnSync('gcloud', ['services', 'enable', 'drive.googleapis.com'], {
+    shell: true
+  });
+}
