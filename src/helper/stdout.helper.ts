@@ -1,6 +1,4 @@
-import { WorkingMode } from '../types/miscellaneous.types';
-import { KEYS_QUANTITY } from '../utils/constants';
-import { writeFile } from 'fs-extra';
+import { writeFile } from 'fs';
 import chalk from 'chalk';
 import i18n from 'i18n';
 
