@@ -30,8 +30,6 @@ export function login() {
   const login = spawnSync('gcloud', ['auth', 'login'], {
     shell: true
   });
-  console.log(login.stdout.toString());
-  console.log(login.stderr.toString());
 
   if (login.error) {
     console.log(login.error);
