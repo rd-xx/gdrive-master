@@ -7,13 +7,15 @@ import i18n from 'i18n';
  *
  * @returns Nothing.
  */
-export function isGcloudInstalled() {
-  try {
-    execSync('gcloud --version', { stdio: 'ignore' });
-    return true;
-  } catch (error) {
-    return false;
-  }
+export async function isGcloudInstalled(): Promise<boolean> {
+  return new Promise((resolve) => {
+    try {
+      execSync('gcloud --version', { stdio: 'ignore' });
+      return resolve(true);
+    } catch (error) {
+      return resolve(false);
+    }
+  });
 }
 
 /**
