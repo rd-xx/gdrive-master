@@ -95,6 +95,22 @@ export async function setProject(projectId: string): Promise<boolean> {
   });
 }
 
+export function getServiceAccount(): string | null {
+  const cmd = spawnSync('gcloud', ['iam', 'service-accounts', 'list'], {
+    shell: true
+  });
+
+  if (cmd.stderr.toString().includes('0 items')) return null;
+
+  const wholeLine = cmd.stdout.toString().split('\n')[1],
+    email = wholeLine
+      .split(' ')
+      .filter((value) =>
+        new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(value)
+      );
+
+  return email[0];
+}
 
 export function enableDriveApi(): void {
   spawnSync('gcloud', ['services', 'enable', 'drive.googleapis.com'], {
