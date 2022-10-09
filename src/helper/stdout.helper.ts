@@ -1,3 +1,4 @@
+import { OperatingMode, WorkingMode } from '../types/miscellaneous.types.js';
 import { writeFile } from 'fs';
 import chalk from 'chalk';
 import i18n from 'i18n';

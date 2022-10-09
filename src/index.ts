@@ -1,19 +1,20 @@
-import { printSettings, welcomeUser } from './helper/stdout.helper';
-import { join, normalize } from 'path';
+import { printSettings, welcomeUser } from './helper/stdout.helper.js';
+import { OperatingMode } from './types/miscellaneous.types.js';
+import { KEYS_QUANTITY } from './utils/constants.js';
 import chalk from 'chalk';
 import i18n from 'i18n';
 import {
   askProjectCreation,
+  askKeysQuantity,
   askWorkingMode,
-  askProjectId,
-  askKeysQuantity
-} from './helper/prompts.helper';
+  askProjectId
+} from './helper/prompts.helper.js';
 import {
   isGcloudInstalled,
+  getServiceAccount,
   createProject,
   setProject
-} from './helper/gcloud.helper';
-import { KEYS_QUANTITY } from './utils/constants';
+} from './helper/gcloud.helper.js';
 
 // Setup i18n
 i18n.configure({
@@ -72,6 +73,13 @@ async function main() {
 
   welcomeUser();
   printSettings(operatingMode, workingMode, keysQuantity);
+
+  const serviceAccount = getServiceAccount();
+  console.log('serviceAccount -----------');
+  console.log(serviceAccount);
+
+  // create the keys with for i loop
+  // for (let i = 0; i < keysQuantity; i++) createKey();
 }
 
 main();

@@ -1,5 +1,5 @@
+import { PROJECT_NAME, SERVICE_ACCOUNT_NAME } from '../utils/constants.js';
 import { execSync, spawn, spawnSync } from 'child_process';
-import { PROJECT_NAME } from '../utils/constants';
 import i18n from 'i18n';
 
 /**
