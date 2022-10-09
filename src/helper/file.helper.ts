@@ -1,15 +1,13 @@
 import { handleError } from './stdout.helper.js';
 import { readdir, writeFile } from 'fs';
-import { join, normalize } from 'path';
+import { join } from 'path';
 
 export async function saveKeys(
   email: string,
   keys: string[]
 ): Promise<string | null> {
-  const rootDirectory = normalize(join(process.cwd(), '..', '..'));
-
   return new Promise((resolve, reject) => {
-    readdir(rootDirectory, (errRead, files) => {
+    readdir(process.cwd(), (errRead, files) => {
       if (errRead) {
         handleError(errRead.message);
         return reject(false);
@@ -19,7 +17,7 @@ export async function saveKeys(
       let i = 1;
       while (keysFiles.includes(`keys${i}.json`)) i++;
 
-      const filePath = join(rootDirectory, `keys${i}.json`);
+      const filePath = join(process.cwd(), `keys${i}.json`);
       writeFile(filePath, `${email}\n${keys.join('\n')}`, (errWrite) => {
         if (errWrite) {
           handleError(errWrite.message);
