@@ -14,7 +14,11 @@
     },
     "keys": {
       "message": "How many keys do you want to create?",
-      "notPositive": "Please enter a positive number."
+      "notPositive": "Please enter a positive number.",
+      "save": {
+        "message": "Do you want to save the keys in a new file?",
+        "saved": "The keys have been successfully saved in the file \"%s\"."
+      }
     },
     "project": {
       "message": "Do you want to create a new project (yes) or use an existing one (no)?",
@@ -25,14 +29,33 @@
     }
   },
   "gcloud": {
-    "check": "Checking if %s is installed...",
+    "checking": "Checking if %s is installed...",
     "installed": "%s detected. Proceeding.",
     "notInstalled": "Seems like you don't have %s installed. Please install it and try again.",
-    "projectQuotaExceeded": "You have exceeded your project quota. Please use a different Google account."
+    "projects": {
+      "quotaExceeded": "You have exceeded your project quota. Please use a different Google account."
+    },
+    "api": {
+      "enabling": "Enabling the %s API...",
+      "enabled": "The %s API is now enabled and ready to use."
+    },
+    "keys": {
+      "creating": "Creating key %s...",
+      "created": "Key %s successfully created.",
+      "failed": "The creation of the key %s has failed. Report the following error to rdx.",
+      "done": "All keys have been created."
+    }
   },
   "errors": {
     "unexpected": "An unexpected error occured.",
     "stacktrace": "The stacktrace has been saved to %s. Please report this issue to rdx.",
     "noStacktrace": "The stacktrace could not be saved."
+  },
+  "exit": {
+    "bye": "Bye :)",
+    "awaiting": "Press any key to exit."
+  },
+  "keys": {
+    "done": "keys.done"
   }
 }

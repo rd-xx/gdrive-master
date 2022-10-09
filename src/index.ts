@@ -1,10 +1,6 @@
-import {
-  handleError,
-  printSettings,
-  welcomeUser
-} from './helper/stdout.helper.js';
 import { OperatingMode } from './types/miscellaneous.types.js';
 import { KEYS_QUANTITY } from './utils/constants.js';
+import { saveKeys } from './helper/file.helper.js';
 import { dirname, join, normalize } from 'path';
 import { fileURLToPath } from 'url';
 import { oraPromise } from 'ora';
@@ -14,15 +10,23 @@ import {
   askProjectCreation,
   askKeysQuantity,
   askWorkingMode,
-  askProjectId
+  askProjectId,
+  askSaveKeys
 } from './helper/prompts.helper.js';
 import {
   isGcloudInstalled,
   enableDriveApi,
   createProject,
   setProject,
-  createKey
+  createKey,
+  getEmail
 } from './helper/gcloud.helper.js';
+import {
+  printSettings,
+  handleError,
+  welcomeUser,
+  exit
+} from './helper/stdout.helper.js';
 
 const __filename = fileURLToPath(import.meta.url),
   __dirname = dirname(__filename);
@@ -72,6 +76,7 @@ async function main() {
     } else await askProjectId();
   }
 
+  // Ask how many keys the user wants to create
   const keysQuantity =
     workingMode === 'auto' ? KEYS_QUANTITY : await askKeysQuantity();
   if (!keysQuantity) return;
@@ -89,6 +94,7 @@ async function main() {
     prefixText: '['
   });
 
+  // Create the keys
   const keys: string[] = [];
   for (let i = 0; i < keysQuantity; i++) {
     const output = await oraPromise(createKey(), {
@@ -101,6 +107,8 @@ async function main() {
     if (output.startsWith('AIza')) keys.push(output);
     else return handleError(output);
   }
+  console.log(i18n.__('gcloud.keys.done') + '\n');
+
   // Save the keys
   const shouldSave = await askSaveKeys();
   if (shouldSave === undefined) return;
@@ -111,7 +119,8 @@ async function main() {
     console.log(i18n.__('prompts.keys.save.saved'), chalk.cyan(fileName));
   }
 
-  console.log(keys);
+  console.log('\n' + i18n.__('exit.bye'));
+  exit();
 }
 
 main();

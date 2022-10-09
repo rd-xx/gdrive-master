@@ -48,3 +48,10 @@ export function handleError(stacktrace: string): void {
     }
   });
 }
+
+export function exit(): void {
+  console.log(i18n.__('exit.awaiting'));
+  process.stdin.setRawMode(true);
+  process.stdin.resume();
+  process.stdin.on('data', process.exit.bind(process, 0));
+}
