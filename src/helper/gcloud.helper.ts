@@ -148,3 +148,11 @@ export async function enableDriveApi(): Promise<void> {
     cmd.on('exit', () => resolve());
   });
 }
+
+export function getEmail(): string {
+  const cmd = spawnSync('gcloud', ['config', 'get-value', 'account'], {
+    shell: true
+  });
+
+  return cmd.stdout.toString();
+}
