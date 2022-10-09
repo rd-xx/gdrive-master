@@ -74,9 +74,16 @@ async function main() {
   welcomeUser();
   printSettings(operatingMode, workingMode, keysQuantity);
 
-  const serviceAccount = getServiceAccount();
-  console.log('serviceAccount -----------');
-  console.log(serviceAccount);
+  // Enable the Google Drive API
+  await oraPromise(enableDriveApi(), {
+    text: `] ${i18n.__('gcloud.api.enabling', chalk.cyan('Google Drive'))}`,
+    successText: `] ${i18n.__(
+      'gcloud.api.enabled',
+      chalk.cyan('Google Drive')
+    )}\n`,
+    prefixText: '['
+  });
+
 
   // create the keys with for i loop
   // for (let i = 0; i < keysQuantity; i++) createKey();
