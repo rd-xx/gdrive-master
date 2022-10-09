@@ -47,6 +47,7 @@ async function main() {
 
   // Ask the user what which working mode he wants to use
   const workingMode = await askWorkingMode();
+  if (!workingMode) return;
   welcomeUser();
   printSettings(workingMode);
 
@@ -56,11 +57,10 @@ async function main() {
     if (!projectId) return;
     setProject(projectId);
   } else {
-    let projectId = '';
-
     const shouldCreateNewProject = await askProjectCreation();
-    if (shouldCreateNewProject) {
-      projectId = createProject() || '';
+    if (shouldCreateNewProject === undefined) return;
+    else if (shouldCreateNewProject) {
+      const projectId = createProject() || '';
       if (!projectId) return;
       setProject(projectId);
     } else {
