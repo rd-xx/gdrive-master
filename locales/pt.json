@@ -1,1 +1,58 @@
-{}
+{
+  "workingModeAuto": "Automático",
+  "workingModeManual": "Manual",
+  "settings": {
+    "operatingMode": "Modo de operação:",
+    "workingMode": "Modo de utilização:",
+    "keys": "Quantidade de chaves:"
+  },
+  "prompts": {
+    "workingMode": {
+      "message": "Qual modo de utilização você quer usar?",
+      "autoDescription": "Cria um projeto e 100 chaves automaticamente.",
+      "manualDescription": "Pergunta o que fazer, etapa por etapa."
+    },
+    "keys": {
+      "message": "Quantas chaves você quer criar?",
+      "notPositive": "Escolha um número positivo.",
+      "save": {
+        "message": "Você quer guardar as chaves num novo arquivo?",
+        "saved": "As chaves foram salvas no arquivo \"%s\" com sucesso."
+      }
+    },
+    "project": {
+      "message": "Você quer criar um novo projeto (y) ou usar um já existente (n)?",
+      "id": {
+        "message": "Qual é o Id do projeto já existente?",
+        "invalid": "O Id do projeto não válido. Tente novamente."
+      }
+    }
+  },
+  "gcloud": {
+    "checking": "Verificando se %s está instalado...",
+    "installed": "%s detectado. Continuando.",
+    "notInstalled": "Parece que %s não está instalado. Instale-o e tente novamente.",
+    "projects": {
+      "quotaExceeded": "Você excedeu o limite de projetos. Use uma conta da Google diferente."
+    },
+    "api": {
+      "enabling": "Ativando a API do %s...",
+      "enabled": "A API do %s foi ativada e está pronta para ser usada."
+    },
+    "keys": {
+      "creating": "Criando a chave n°%s...",
+      "created": "Chave n°%s criada com sucesso.",
+      "failed": "A criação da chave n°%s falhou. Reporte o erro seguinte ao o rdx.",
+      "done": "Todas as chaves foram criadas."
+    }
+  },
+  "errors": {
+    "unexpected": "Um erro inesperado ocorreu.",
+    "stacktrace": "O erro foi salvo no arquivo %s. Por favor reporte o erro ao rdx.",
+    "noStacktrace": "O erro não pôde ser salvo."
+  },
+  "exit": {
+    "bye": "Tchau :)",
+    "awaiting": "Pressione qualquer tecla para fechar."
+  }
+}

@@ -54,8 +54,5 @@
   "exit": {
     "bye": "Bye :)",
     "awaiting": "Press any key to exit."
-  },
-  "keys": {
-    "done": "keys.done"
   }
 }
