@@ -40,7 +40,7 @@ i18n.configure({
 i18n.setLocale(Intl.DateTimeFormat().resolvedOptions().locale);
 
 // Print the project name + version
-welcomeUser();
+await welcomeUser();
 
 async function main() {
   // Checking if gcloud is installed
@@ -79,7 +79,7 @@ async function main() {
     workingMode === 'auto' ? KEYS_QUANTITY : await askKeysQuantity();
   if (!keysQuantity) return;
 
-  welcomeUser();
+  await welcomeUser();
   printSettings(operatingMode, workingMode, keysQuantity);
 
   // Enable the Google Drive API

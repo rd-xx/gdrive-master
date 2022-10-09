@@ -1,10 +1,14 @@
 import { OperatingMode, WorkingMode } from '../types/miscellaneous.types.js';
-import { version } from '../../package.json';
 import { writeFile } from 'fs';
+import { readFile } from 'fs/promises';
 import chalk from 'chalk';
 import i18n from 'i18n';
+import { join } from 'path';
 
-export function welcomeUser(): void {
+export async function welcomeUser(): Promise<void> {
+  const buffer = await readFile(join(process.cwd(), 'package.json')),
+    version = JSON.parse(buffer.toString()).version;
+
   console.clear();
   console.log(chalk.gray.bold('gdrive-master »', version) + '\n');
 }
