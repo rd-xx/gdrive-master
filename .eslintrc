@@ -17,5 +17,5 @@
     "indent": "off",
     "prettier/prettier": ["warn", { "endOfLine": "auto" }]
   },
-  "ignorePatterns": ["**/node_modules/**", "*.js"]
+  "ignorePatterns": ["**/node_modules/**", "*.js", "build/*"]
 }

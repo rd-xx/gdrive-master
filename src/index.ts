@@ -1,7 +1,7 @@
 import { OperatingMode } from './types/miscellaneous.types.js';
 import { KEYS_QUANTITY } from './utils/constants.js';
 import { saveKeys } from './helper/file.helper.js';
-import { join, normalize } from 'path';
+import { dirname, join } from 'path';
 import { oraPromise } from 'ora';
 import chalk from 'chalk';
 import i18n from 'i18n';
@@ -32,7 +32,7 @@ i18n.configure({
   locales: ['en', 'fr', 'pt'],
   defaultLocale: 'en',
   fallbacks: { 'fr-*': 'fr', 'pt-*': 'pt' },
-  directory: normalize(join(process.cwd(), 'locales')),
+  directory: join(dirname(dirname(process.argv[1])), 'locales'),
   objectNotation: true
 });
 i18n.setLocale(Intl.DateTimeFormat().resolvedOptions().locale);

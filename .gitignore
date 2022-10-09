@@ -1,3 +1,6 @@
 node_modules
 dist
 keys*.json
+build/.pkg-cache
+build/release
+build/bundled.js

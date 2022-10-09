@@ -7,7 +7,9 @@
   "type": "module",
   "node": ">=14.16",
   "scripts": {
-    "start": "tsc-watch --onSuccess \"node .\""
+    "start": "tsc-watch --onSuccess \"node .\"",
+    "bundle": "esbuild src/index.ts --bundle --platform=node --target=node16 --outfile=build/bundled.js",
+    "build": "npm run bundle && ts-node --esm build/builder.ts"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,11 @@
     "url": "https://github.com/rd-xx/gdrive-master/issues"
   },
   "homepage": "https://github.com/rd-xx/gdrive-master#readme",
+  "pkg": {
+    "assets": [
+      "./locales/*"
+    ]
+  },
   "dependencies": {
     "chalk": "^5.1.0",
     "i18n": "^0.15.1",
@@ -26,15 +33,20 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "@types/glob": "^8.0.0",
     "@types/i18n": "^0.13.4",
     "@types/node": "^18.8.3",
     "@types/prompts": "^2.4.1",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
+    "esbuild": "^0.15.10",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "pkg": "^5.8.0",
     "prettier": "^2.7.1",
+    "rcedit": "^3.0.1",
+    "ts-node": "^10.9.1",
     "tsc-watch": "^5.0.3",
     "typescript": "^4.8.4"
   }
