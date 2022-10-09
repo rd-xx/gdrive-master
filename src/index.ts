@@ -1,4 +1,8 @@
-import { printSettings, welcomeUser } from './helper/stdout.helper.js';
+import {
+  handleError,
+  printSettings,
+  welcomeUser
+} from './helper/stdout.helper.js';
 import { OperatingMode } from './types/miscellaneous.types.js';
 import { KEYS_QUANTITY } from './utils/constants.js';
 import { dirname, join, normalize } from 'path';
@@ -14,9 +18,10 @@ import {
 } from './helper/prompts.helper.js';
 import {
   isGcloudInstalled,
-  getServiceAccount,
+  enableDriveApi,
   createProject,
-  setProject
+  setProject,
+  createKey
 } from './helper/gcloud.helper.js';
 
 const __filename = fileURLToPath(import.meta.url),
@@ -38,7 +43,7 @@ welcomeUser();
 async function main() {
   // Checking if gcloud is installed
   await oraPromise(isGcloudInstalled(), {
-    text: `] ${i18n.__('gcloud.check', chalk.cyan('gcloud CLI'))}`,
+    text: `] ${i18n.__('gcloud.checking', chalk.cyan('gcloud CLI'))}`,
     successText: `] ${i18n.__('gcloud.installed', chalk.cyan('gcloud CLI'))}\n`,
     failText: `] ${i18n.__('gcloud.notInstalled', chalk.cyan('gcloud CLI'))}`,
     prefixText: '['
@@ -84,9 +89,20 @@ async function main() {
     prefixText: '['
   });
 
+  const keys: string[] = [];
+  for (let i = 0; i < keysQuantity; i++) {
+    const output = await oraPromise(createKey(), {
+      text: `] ${i18n.__('gcloud.keys.creating', chalk.cyan(i + 1))}`,
+      successText: `] ${i18n.__('gcloud.keys.created', chalk.cyan(i + 1))}`,
+      failText: `] ${i18n.__('gcloud.keys.failed', chalk.cyan(i + 1))}\n`,
+      prefixText: '['
+    });
 
-  // create the keys with for i loop
-  // for (let i = 0; i < keysQuantity; i++) createKey();
+    if (output.startsWith('AIza')) keys.push(output);
+    else return handleError(output);
+  }
+
+  console.log(keys);
 }
 
 main();
