@@ -48,7 +48,8 @@ async function main() {
   // login();
 
   // Ask the user what which working mode he wants to use
-  const workingMode = await askWorkingMode();
+  const operatingMode: OperatingMode = 'standalone',
+    workingMode = await askWorkingMode();
   if (!workingMode) return;
 
   // Set the working project on glcoud
