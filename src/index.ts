@@ -118,7 +118,10 @@ async function main() {
       fileName = await saveKeys(email, keys);
     if (!fileName) return;
     console.log(i18n.__('prompts.keys.save.saved'), chalk.cyan(fileName));
-  } else for (const key of keys) console.log(key);
+  } else {
+    console.log('');
+    for (const key of keys) console.log(key);
+  }
 
   console.log('\n' + i18n.__('exit.bye'));
   exit();
