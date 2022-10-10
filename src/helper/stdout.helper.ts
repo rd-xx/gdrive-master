@@ -3,10 +3,14 @@ import { writeFile } from 'fs';
 import { readFile } from 'fs/promises';
 import chalk from 'chalk';
 import i18n from 'i18n';
-import { join } from 'path';
+import { dirname, join } from 'path';
 
 export async function welcomeUser(): Promise<void> {
-  const buffer = await readFile(join(process.cwd(), 'package.json')),
+  const buffer = await readFile(
+      process.argv[1].includes('snapshot')
+        ? join(dirname(dirname(process.argv[1])), 'package.json')
+        : join(process.cwd(), 'package.json')
+    ),
     version = JSON.parse(buffer.toString()).version;
 
   console.clear();

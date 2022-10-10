@@ -1,6 +1,6 @@
 {
   "name": "gdrive-master",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Create Google Drive keys easily.",
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
@@ -23,7 +23,8 @@
   "homepage": "https://github.com/rd-xx/gdrive-master#readme",
   "pkg": {
     "assets": [
-      "./locales/*"
+      "./locales/*",
+      "./package.json"
     ]
   },
   "dependencies": {
