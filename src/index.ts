@@ -125,3 +125,8 @@ async function main() {
 }
 
 main();
+
+process.on('uncaughtException', async (error) => {
+  if (error.message.includes('EPIPE')) return;
+  handleError(`${error.name}\n${error.message}\n\n${error.stack}`);
+});
