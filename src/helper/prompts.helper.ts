@@ -7,11 +7,13 @@ import i18n from 'i18n';
  * Asks the user which working mode he wants to use.
  * Either automatic or manual.
  *
- * @returns Working mode as a string or undefined if the user cancelled the operation.
+ * @returns {Promise<WorkingMode | undefined>} the working mode or undefined if the user cancelled the operation.
  */
 export async function askWorkingMode(): Promise<WorkingMode | undefined> {
   const response = await prompts({
     type: 'select',
+    name: 'mode',
+    message: i18n.__('prompts.workingMode.message'),
     choices: [
       {
         title: i18n.__('workingModeAuto'),
@@ -23,9 +25,7 @@ export async function askWorkingMode(): Promise<WorkingMode | undefined> {
         value: 'manual',
         description: i18n.__('prompts.workingMode.manualDescription')
       }
-    ],
-    name: 'mode',
-    message: i18n.__('prompts.workingMode.message')
+    ]
   });
 
   return response.mode;
@@ -35,7 +35,7 @@ export async function askWorkingMode(): Promise<WorkingMode | undefined> {
  * Asks the user if he wants to create a new project.
  * If not, we should ask him for the project Id.
  *
- * @returns True if he wants to create project, false if not or undefined if the user cancelled the operation.
+ * @returns {Promise<boolean | undefined>} true if the user wants to create a new project, false if not or undefined if he cancelled the operation.
  */
 export async function askProjectCreation(): Promise<boolean | undefined> {
   const response = await prompts({
@@ -50,7 +50,7 @@ export async function askProjectCreation(): Promise<boolean | undefined> {
 /**
  * Asks the user for the project Id.
  *
- * @returns Project Id as a string or undefined if the user cancelled the operation.
+ * @returns {Promise<string | undefined>} project Id as a string or undefined if the user cancelled the operation.
  */
 export async function askProjectId(): Promise<string | undefined> {
   const response = await prompts({
@@ -70,7 +70,7 @@ export async function askProjectId(): Promise<string | undefined> {
 /**
  * Asks the user how many keys he wants to create.
  *
- * @returns Number of keys to generate or undefined if the user cancelled the operation.
+ * @returns {Promise<number | undefined>} number of keys to generate or undefined if the user cancelled the operation.
  */
 export async function askKeysQuantity(): Promise<number | undefined> {
   const response = await prompts({
@@ -89,7 +89,7 @@ export async function askKeysQuantity(): Promise<number | undefined> {
 /**
  * Asks the user if he wants to create a new file with all the created keys.
  *
- * @returns True if the user wants to save the created keys in a new file, false if not or undefined if the user cancelled the operation.
+ * @returns {Promise<boolean | undefined>} true if the user wants to save the created keys in a new file, false if not or undefined if he cancelled the operation.
  */
 export async function askSaveKeys(): Promise<boolean | undefined> {
   const response = await prompts({
