@@ -1,4 +1,3 @@
-import { OperatingMode } from './types/miscellaneous.types.js';
 import { KEYS_QUANTITY } from './utils/constants.js';
 import { saveKeys } from './helper/file.helper.js';
 import { dirname, join } from 'path';
@@ -7,6 +6,7 @@ import chalk from 'chalk';
 import i18n from 'i18n';
 import {
   askProjectCreation,
+  askOperatingMode,
   askKeysQuantity,
   askWorkingMode,
   askProjectId,
@@ -56,9 +56,12 @@ async function main() {
   logout();
   login();
 
+  // Ask the user what which operating mode he wants to use
+  const operatingMode = await askOperatingMode();
+  if (!operatingMode) return;
+
   // Ask the user what which working mode he wants to use
-  const operatingMode: OperatingMode = 'standalone',
-    workingMode = await askWorkingMode();
+  const workingMode = await askWorkingMode();
   if (!workingMode) return;
 
   // Set the working project on glcoud

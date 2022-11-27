@@ -1,12 +1,23 @@
 {
-  "workingModeAuto": "Automático",
-  "workingModeManual": "Manual",
+  "operatingMode": {
+    "standalone": "",
+    "server": ""
+  },
+  "workingMode": {
+    "auto": "Automático",
+    "manual": "Manual"
+  },
   "settings": {
     "operatingMode": "Modo de operação:",
     "workingMode": "Modo de utilização:",
     "keys": "Quantidade de chaves:"
   },
   "prompts": {
+    "operatingMode": {
+      "message": "",
+      "standaloneDescription": "",
+      "serverDescription": ""
+    },
     "workingMode": {
       "message": "Qual modo de utilização você quer usar?",
       "autoDescription": "Cria um projeto e 100 chaves automaticamente.",

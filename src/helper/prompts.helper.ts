@@ -1,7 +1,33 @@
-import { WorkingMode } from '../types/miscellaneous.types.js';
+import { OperatingMode, WorkingMode } from '../types/miscellaneous.types.js';
 import { setProject } from './gcloud.helper.js';
 import prompts from 'prompts';
 import i18n from 'i18n';
+
+/**
+ * Asks the user which operating mode he wants to use.
+ * Either standalone or server.
+ *
+ * @returns {Promise<OperatingMode | undefined>} the operating mode selected by the user or undefined if the user canceled the operation.
+ */
+export async function askOperatingMode(): Promise<OperatingMode | undefined> {
+  const response = await prompts({
+    type: 'select',
+    name: 'value',
+    message: i18n.__('prompts.operatingMode.message'),
+    choices: [
+      {
+        title: i18n.__('prompts.operatingMode.standaloneDescription'),
+        value: 'standalone'
+      },
+      {
+        title: i18n.__('prompts.operatingMode.serverDescription'),
+        value: 'server'
+      }
+    ]
+  });
+
+  return response.value;
+}
 
 /**
  * Asks the user which working mode he wants to use.

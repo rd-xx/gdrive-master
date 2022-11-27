@@ -1,4 +1,8 @@
 {
+  "operatingMode": {
+    "standalone": "Standalone",
+    "server": "Server"
+  },
   "workingMode": {
     "auto": "Auto",
     "manual": "Manual"
@@ -9,6 +13,11 @@
     "keys": "Quantity of keys:"
   },
   "prompts": {
+    "operatingMode": {
+      "message": "Which operating mode do you want to use?",
+      "standaloneDescription": "Does not communicate with the server at all.",
+      "serverDescription": "Sends the keys to the server automatically."
+    },
     "workingMode": {
       "message": "Which working mode do you want to use?",
       "autoDescription": "Creates a project and 100 keys automatically.",
