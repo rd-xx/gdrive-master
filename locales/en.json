@@ -1,6 +1,8 @@
 {
-  "workingModeAuto": "Auto",
-  "workingModeManual": "Manual",
+  "workingMode": {
+    "auto": "Auto",
+    "manual": "Manual"
+  },
   "settings": {
     "operatingMode": "Operating mode:",
     "workingMode": "Working mode:",

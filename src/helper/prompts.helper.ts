@@ -16,12 +16,12 @@ export async function askWorkingMode(): Promise<WorkingMode | undefined> {
     message: i18n.__('prompts.workingMode.message'),
     choices: [
       {
-        title: i18n.__('workingModeAuto'),
+        title: i18n.__('workingMode.auto'),
         value: 'auto',
         description: i18n.__('prompts.workingMode.autoDescription')
       },
       {
-        title: i18n.__('workingModeManual'),
+        title: i18n.__('workingMode.manual'),
         value: 'manual',
         description: i18n.__('prompts.workingMode.manualDescription')
       }
