@@ -65,19 +65,17 @@ async function main() {
   if (!workingMode) return;
 
   // Set the working project on glcoud
-  if (workingMode === 'auto') {
-    const projectId = createProject();
-    if (!projectId) return;
-    setProject(projectId);
-  } else {
+  let projectId: string | void;
+  if (workingMode === 'auto') projectId = createProject();
+  else {
     const shouldCreateNewProject = await askProjectCreation();
     if (shouldCreateNewProject === undefined) return;
-    else if (shouldCreateNewProject) {
-      const projectId = createProject() || '';
-      if (!projectId) return;
-      setProject(projectId);
-    } else await askProjectId();
+    else if (shouldCreateNewProject) projectId = createProject();
+    else projectId = await askProjectId();
   }
+
+  if (!projectId) return;
+  setProject(projectId);
 
   // Ask how many keys the user wants to create
   const keysQuantity =
