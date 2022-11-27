@@ -66,7 +66,7 @@ export function createProject(): string | void {
     );
 
     if (cmd.stderr.toString().includes('project quota')) {
-      console.log('[❌]', i18n.__('gcloud.projectQuotaExceeded'));
+      console.log('\n[❌]', i18n.__('gcloud.quotaExceeded'));
       return;
     }
 

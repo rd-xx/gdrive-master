@@ -43,9 +43,7 @@
     "checking": "Checking if %s is installed...",
     "installed": "%s detected. Proceeding.",
     "notInstalled": "Seems like you don't have %s installed. Please install it and try again.",
-    "projects": {
-      "quotaExceeded": "You have exceeded your project quota. Please use a different Google account."
-    },
+    "quotaExceeded": "You have exceeded your project quota. Please use a different Google account.",
     "api": {
       "enabling": "Enabling the %s API...",
       "enabled": "The %s API is now enabled and ready to use."

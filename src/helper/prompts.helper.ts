@@ -16,11 +16,13 @@ export async function askOperatingMode(): Promise<OperatingMode | undefined> {
     message: i18n.__('prompts.operatingMode.message'),
     choices: [
       {
-        title: i18n.__('prompts.operatingMode.standaloneDescription'),
+        title: i18n.__('operatingMode.standalone'),
+        description: i18n.__('prompts.operatingMode.standaloneDescription'),
         value: 'standalone'
       },
       {
-        title: i18n.__('prompts.operatingMode.serverDescription'),
+        title: i18n.__('operatingMode.server'),
+        description: i18n.__('prompts.operatingMode.serverDescription'),
         value: 'server'
       }
     ]
@@ -43,13 +45,13 @@ export async function askWorkingMode(): Promise<WorkingMode | undefined> {
     choices: [
       {
         title: i18n.__('workingMode.auto'),
-        value: 'auto',
-        description: i18n.__('prompts.workingMode.autoDescription')
+        description: i18n.__('prompts.workingMode.autoDescription'),
+        value: 'auto'
       },
       {
         title: i18n.__('workingMode.manual'),
-        value: 'manual',
-        description: i18n.__('prompts.workingMode.manualDescription')
+        description: i18n.__('prompts.workingMode.manualDescription'),
+        value: 'manual'
       }
     ]
   });
