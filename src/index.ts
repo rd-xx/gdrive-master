@@ -1,5 +1,5 @@
 import { KEYS_QUANTITY } from './utils/constants.js';
-import { saveKeys } from './helper/file.helper.js';
+import { saveKeys } from './helpers/file.helper.js';
 import { dirname, join } from 'path';
 import { oraPromise } from 'ora';
 import chalk from 'chalk';
@@ -11,7 +11,7 @@ import {
   askWorkingMode,
   askProjectId,
   askSaveKeys
-} from './helper/prompts.helper.js';
+} from './helpers/prompts.helper.js';
 import {
   isGcloudInstalled,
   enableDriveApi,
@@ -21,13 +21,13 @@ import {
   getEmail,
   logout,
   login
-} from './helper/gcloud.helper.js';
+} from './helpers/gcloud.helper.js';
 import {
   printSettings,
   handleError,
   welcomeUser,
   exit
-} from './helper/stdout.helper.js';
+} from './helpers/stdout.helper.js';
 
 // Setup i18n
 i18n.configure({

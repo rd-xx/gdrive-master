@@ -4,3 +4,9 @@ export type Config = {
 
 export type OperatingMode = 'standalone' | 'server';
 export type WorkingMode = 'auto' | 'manual';
+
+export type RequestOptions = {
+  method: 'GET' | 'POST';
+  headers: Record<string, string>;
+  body: unknown;
+};
