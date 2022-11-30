@@ -1,9 +1,9 @@
 import { OperatingMode, WorkingMode } from '../types/miscellaneous.types.js';
-import { writeFile } from 'fs';
 import { readFile } from 'fs/promises';
+import { dirname, join } from 'path';
+import { writeFile } from 'fs';
 import chalk from 'chalk';
 import i18n from 'i18n';
-import { dirname, join } from 'path';
 
 export async function welcomeUser(): Promise<void> {
   const buffer = await readFile(
