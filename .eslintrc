@@ -11,9 +11,9 @@
   "rules": {
     "one-var": ["warn", "consecutive"],
     "curly": ["warn", "multi"],
-    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/array-type": ["warn", { "default": "array-simple" }],
     "indent": "off",
     "prettier/prettier": ["warn", { "endOfLine": "auto" }]
   },
