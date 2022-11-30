@@ -41,7 +41,7 @@
   },
   "gcloud": {
     "checking": "Verificando se %s está instalado...",
-    "installed": "%s detectado. Continuando.",
+    "installed": "%s detectado.",
     "notInstalled": "Parece que %s não está instalado. Instale-o e tente novamente.",
     "projects": {
       "quotaExceeded": "Você excedeu o limite de projetos. Use uma conta da Google diferente."

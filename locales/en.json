@@ -41,7 +41,7 @@
   },
   "gcloud": {
     "checking": "Checking if %s is installed...",
-    "installed": "%s detected. Proceeding.",
+    "installed": "%s detected.",
     "notInstalled": "Seems like you don't have %s installed. Please install it and try again.",
     "quotaExceeded": "You have exceeded your project quota. Please use a different Google account.",
     "api": {

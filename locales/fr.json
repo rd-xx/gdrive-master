@@ -1,1 +1,67 @@
-{}
+{
+  "operatingMode": {
+    "standalone": "Seul",
+    "server": "Serveur"
+  },
+  "workingMode": {
+    "auto": "Auto",
+    "manual": "Manuel"
+  },
+  "settings": {
+    "operatingMode": "Mode d'opération :",
+    "workingMode": "Mode de fonctionnement :",
+    "keys": "Quantité de clés :"
+  },
+  "prompts": {
+    "operatingMode": {
+      "message": "Quel mode d'opération souhaitez-vous utiliser ?",
+      "standaloneDescription": "Ne communique pas du tout avec le serveur.",
+      "serverDescription": "Envoie les clés au serveur automatiquement."
+    },
+    "workingMode": {
+      "message": "Quel mode de fonctionnement souhaitez-vous utiliser ?",
+      "autoDescription": "Créer un projet et 100 clés automatiquement.",
+      "manualDescription": "Demande quoi faire chaque étape."
+    },
+    "keys": {
+      "message": "Combien de clés souhaitez-vous créer ?",
+      "notPositive": "Merci de rentrer un nombre positif.",
+      "save": {
+        "message": "Voulez-vous sauvegarder les clés dans un nouveau fichier ?",
+        "saved": "Les clés ont bien été sauvegardées dans le fichier \"%s\"."
+      }
+    },
+    "project": {
+      "message": "Souhaitez-vous créer un nouveau projet (yes) ou en utiliser un déjà existant ?",
+      "id": {
+        "message": "Quel est l'Id du projet existant ?",
+        "invalid": "Id du projet invalide. Essayez à nouveau."
+      }
+    }
+  },
+  "gcloud": {
+    "checking": "En train de vérifier si %s est installé...",
+    "installed": "%s détecté.",
+    "notInstalled": "Il semblerait que vous n'ayez pas installé %s. Installez-le et essayez à nouveau.",
+    "quotaExceeded": "Vous avez dépassé la limite de projets. Veuillez utiliser un compte Google différent.",
+    "api": {
+      "enabling": "Activation l'API %s...",
+      "enabled": "L'API %s est maintenant activée et prête à l'utilisation."
+    },
+    "keys": {
+      "creating": "Création de la clé %s...",
+      "created": "Clé %s créée avec succès.",
+      "failed": "La création de clé %s a échouée. Veuillez informer rdx de l'erreur suivante.",
+      "done": "Toutes les clés ont été créées."
+    }
+  },
+  "errors": {
+    "unexpected": "Une erreur inespérée est survenue.",
+    "stacktrace": "Le stacktrace a été sauvegardé dans %s. Veuillez informer rdx de l'erreur.",
+    "noStacktrace": "Le stacktrace n'a pas pu être sauvegarder."
+  },
+  "exit": {
+    "bye": "Au revoir :)",
+    "awaiting": "Appuyez sur n'importe quelle touche pour quitter."
+  }
+}
