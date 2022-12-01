@@ -8,5 +8,4 @@ export type WorkingMode = 'auto' | 'manual';
 export type RequestOptions = {
   method: 'GET' | 'POST';
   headers: Record<string, string>;
-  body: unknown;
 };
