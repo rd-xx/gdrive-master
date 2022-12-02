@@ -95,6 +95,29 @@ async function main() {
 main();
 
 process.on('uncaughtException', async (error) => {
-  if (error.message.includes('EPIPE')) return;
+  if (error.name === 'AxiosError') return;
+  else if (error.stack?.includes('ECONNREFUSED')) return;
+  else if (error.message.includes('EPIPE')) return;
   handleError(`${error.name}\n${error.message}\n\n${error.stack}`);
 });
+
+axios.interceptors.response.use(
+  function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+  },
+  function (error) {
+    if (error instanceof AxiosError)
+      if (error.response && error.response.status === 403) {
+        console.log('\n' + t('api.errors.forbidden') + '\n');
+        exit();
+      } else if (error.stack && error.stack.includes('ECONNREFUSED')) {
+        console.log('\n' + t('api.errors.offline') + '\n');
+        exit();
+      }
+
+    // console.log(error);
+    return Promise.reject(error);
+  }
+);
