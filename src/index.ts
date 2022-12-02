@@ -18,7 +18,7 @@ dotenv.config();
 const rootPath = process.argv[1].includes('snapshot')
   ? dirname(dirname(process.argv[1]))
   : process.cwd();
-global.paths = {
+globalThis.paths = {
   root: rootPath,
   config: join(rootPath, 'config.json'),
   locales: join(rootPath, 'locales')
