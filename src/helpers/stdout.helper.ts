@@ -58,5 +58,8 @@ export function exit(): void {
   console.log(i18n.__('exit.awaiting'));
   process.stdin.setRawMode(true);
   process.stdin.resume();
-  process.stdin.on('data', process.exit.bind(process, 0));
+  process.stdin.on('data', () => {
+    console.log('EXITED'); // For debugging purposes
+    return process.exit.bind(process, 0);
+  });
 }
