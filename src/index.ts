@@ -1,7 +1,7 @@
 import { isGcloudInstalled, logout, login } from './helpers/gcloud.helper.js';
 import { handleError, welcomeUser, exit } from './helpers/stdout.helper.js';
-import { askOperatingMode } from './helpers/prompts.helper.js';
-import { checkEmail, getLatestUpdate } from './helpers/api.helper.js';
+import { askApiToken, askOperatingMode } from './helpers/prompts.helper.js';
+import { isTokenValid } from './helpers/api.helper.js';
 import standaloneMode from './modes/standalone.mode.js';
 import serverMode from './modes/server.mode.js';
 import axios, { AxiosError } from 'axios';
@@ -11,9 +11,10 @@ import * as dotenv from 'dotenv';
 import chalk from 'chalk';
 import i18n from 'i18n';
 import {
-  getConfig,
+  updateConfig,
   isFirstTime,
-  writeConfig
+  writeConfig,
+  getConfig
 } from './helpers/config.helper.js';
 
 // Init dotenv

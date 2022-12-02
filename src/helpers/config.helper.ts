@@ -4,7 +4,12 @@ import fsExtra from 'fs-extra';
 const { readJson, writeJson, pathExists } = fsExtra; // Throws an error if I don't do this.
 
 export async function isFirstTime(): Promise<boolean> {
-  return !(await pathExists(globalThis.paths.config));
+  const configExists = await pathExists('./config.json');
+  if (!configExists) return true;
+
+  const config = await getConfig();
+  if (!config.apiToken) return true;
+  else return false;
 }
 
 export async function writeConfig(config: JsonConfig): Promise<JsonConfig> {
@@ -21,11 +26,11 @@ export async function getConfig(): Promise<JsonConfig> {
   }
 }
 
-export async function updateConfig(
-  verbose?: boolean,
-  debug?: boolean,
-  apiToken?: string
-): Promise<JsonConfig> {
+export async function updateConfig({
+  verbose,
+  debug,
+  apiToken
+}: Partial<JsonConfig>): Promise<JsonConfig> {
   const config = await getConfig();
   config.verbose = verbose || config.verbose || false;
   config.debug = debug || config.debug || false;

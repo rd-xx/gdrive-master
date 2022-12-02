@@ -1,5 +1,6 @@
 import { OperatingMode, WorkingMode } from '../utils/types.js';
 import { setProject } from './gcloud.helper.js';
+import { isTokenValid } from './api.helper.js';
 import prompts from 'prompts';
 import i18n from 'i18n';
 
@@ -127,4 +128,26 @@ export async function askSaveKeys(): Promise<boolean | undefined> {
   });
 
   return response.save;
+}
+
+/**
+ * Asks the user for his API token.
+ *
+ * @returns {Promise<string | undefined>} token as a string or undefined if the user cancelled the operation.
+ */
+export async function askApiToken(): Promise<string | undefined> {
+  const response = await prompts({
+    type: 'text',
+    name: 'token',
+    message: i18n.__('prompts.apiToken.message'),
+    validate: async (value: string) => {
+      if (value.length < 0) return i18n.__('prompts.apiToken.invalid');
+
+      const apiResponse = await isTokenValid(value);
+      if (apiResponse) return true;
+      else return i18n.__('prompts.apiToken.invalid');
+    }
+  });
+
+  return response.token;
 }
