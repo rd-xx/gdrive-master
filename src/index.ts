@@ -46,50 +46,14 @@ async function main() {
     prefixText: '['
   });
 
-  logout();
-  login();
-
-  // Ask the user what which operating mode he wants to use
-  const operatingMode = await askOperatingMode();
-  if (!operatingMode) return;
-
-  // Ask the user what which working mode he wants to use
-  const workingMode = await askWorkingMode();
-  if (!workingMode) return;
-
-  // Set the working project on glcoud
-  let projectId: string | void;
-  if (workingMode === 'auto') projectId = createProject();
-  else {
-    const shouldCreateNewProject = await askProjectCreation();
-    if (shouldCreateNewProject === undefined) return;
-    else if (shouldCreateNewProject) projectId = createProject();
-    else projectId = await askProjectId();
-  }
-
-  if (!projectId) return;
-  setProject(projectId);
-
-  // Ask how many keys the user wants to create
-  const keysQuantity =
-    workingMode === 'auto' ? KEYS_QUANTITY : await askKeysQuantity();
-  if (!keysQuantity) return;
-
-  const shouldSave = await askSaveKeys();
-  if (shouldSave === undefined) return;
-
-  await welcomeUser();
-  printSettings(operatingMode, workingMode, keysQuantity);
-
-  // Enable the Google Drive API
-  await oraPromise(enableDriveApi(), {
-    text: `] ${i18n.__('gcloud.api.enabling', chalk.cyan('Google Drive'))}`,
-    successText: `] ${i18n.__(
-      'gcloud.api.enabled',
-      chalk.cyan('Google Drive')
-    )}\n`,
-    prefixText: '['
-  });
+  // Logout from gcloud
+  if (config.verbose)
+    await oraPromise(logout(), {
+      text: `] ${t('gcloud.logout.ongoing')}`,
+      successText: `] ${t('gcloud.logout.done')}`,
+      prefixText: '['
+    });
+  else await logout();
 
   // Login to gcloud
   try {

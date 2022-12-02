@@ -40,11 +40,25 @@ export async function login(): Promise<void> {
 /**
  * Log out from all accounts.
  *
- * @returns Nothing.
+ * @returns {Promise<void>} doesn't return anything.
  */
-export function logout(): void {
-  spawnSync('gcloud', ['auth', 'revoke', '--all'], {
-    shell: true
+export async function logout(): Promise<void> {
+  return new Promise((resolve) => {
+    const cmd = spawn('gcloud', ['auth', 'revoke', '--all'], {
+      shell: true
+    });
+
+    cmd.stdout.on('data', (data) => {
+      if (String(data).includes('Revoked credentials')) resolve();
+    });
+
+    cmd.stderr.on('data', (data) => {
+      if (
+        String(data).includes('Revoked credentials') ||
+        String(data).includes('No credentials available')
+      )
+        resolve();
+    });
   });
 }
 
@@ -155,5 +169,6 @@ export function getEmail(): string {
     shell: true
   });
 
+  // TODO: get first line of the output
   return cmd.stdout.toString();
 }
