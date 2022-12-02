@@ -78,6 +78,8 @@ export default async function serverMode() {
     prefixText: '['
   });
   const serviceAccountKey = await getKeyFile(),
+    gdriveInstance = gdriveLogin(),
+    availableSpace = await getAvailableSpace(gdriveInstance);
   await deleteKeyFile();
 
   // Create the keys

@@ -7,6 +7,11 @@ export type JsonConfig = {
   apiToken: string | null;
 };
 
+export type DriveStorage = {
+  limit: string; // bytes
+  usage: string; // bytes
+};
+
 export interface ApiResponse {
   statusCode: number;
   statusLabel: 'OK' | 'RETRY' | 'ERROR';
