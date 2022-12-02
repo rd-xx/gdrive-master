@@ -50,6 +50,8 @@ async function main() {
   }
 
   const config = await getConfig();
+  axios.defaults.baseURL = process.env.API_ADDRESS;
+  axios.defaults.headers.common['Authorization'] = `${config.apiToken}`; // Idk why but I have to it this way
 
   // Checking if gcloud is installed
   await oraPromise(isGcloudInstalled(), {
