@@ -72,6 +72,7 @@ async function main() {
   // Checking if gcloud is installed
   await oraPromise(isGcloudInstalled(), {
     text: `] ${t('gcloud.cli.ongoing', chalk.cyan('gcloud CLI'))}`,
+    successText: `] ${t('gcloud.cli.done', chalk.cyan('gcloud CLI'))}`,
     failText: `] ${t('gcloud.cli.failed', chalk.cyan('gcloud CLI'))}`,
     prefixText: '['
   });
