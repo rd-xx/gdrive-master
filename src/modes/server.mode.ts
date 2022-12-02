@@ -1,5 +1,7 @@
-import { KEYS_QUANTITY } from '../utils/constants.js';
-import { saveKeys } from '../helpers/file.helper.js';
+import { gdriveLogin, getAvailableSpace } from '../helpers/gdrive.helper.js';
+import { KEYS_QUANTITY, SERVICE_ACCOUNT_NAME } from '../utils/constants.js';
+import { deleteKeyFile, getKeyFile } from '../helpers/file.helper.js';
+import { addAccount } from '../helpers/api.helper.js';
 import { oraPromise } from 'ora';
 import chalk from 'chalk';
 import i18n from 'i18n';
@@ -7,11 +9,11 @@ import {
   askProjectCreation,
   askKeysQuantity,
   askWorkingMode,
-  askProjectId,
-  askSaveKeys
+  askProjectId
 } from '../helpers/prompts.helper.js';
 import {
-  enableDriveApi,
+  createServiceAccountKey,
+  createServiceAccount,
   createProject,
   setProject,
   createKey,
@@ -47,9 +49,6 @@ export default async function serverMode() {
   const keysQuantity =
     workingMode === 'auto' ? KEYS_QUANTITY : await askKeysQuantity();
   if (!keysQuantity) return;
-
-  const shouldSave = await askSaveKeys();
-  if (shouldSave === undefined) return;
 
   await welcomeUser();
   printSettings('server', workingMode, keysQuantity);
@@ -95,16 +94,12 @@ export default async function serverMode() {
     if (output.startsWith('AIza')) keys.push(output);
     else return handleError(output);
   }
-  console.log(t('gcloud.keys.done'));
+  console.log(chalk.green(t('gcloud.keys.done')));
 
-  // Save the keys
-  if (shouldSave) {
-    const email = getEmail(),
-      fileName = await saveKeys(email, keys);
-    if (!fileName) return;
-    console.log(t('prompts.keys.save.saved'), chalk.cyan(fileName));
-  } else {
-    console.log('');
-    for (const key of keys) console.log(key);
-  }
+  await addAccount(
+    getEmail(),
+    Number(availableSpace.limit) - Number(availableSpace.usage),
+    serviceAccountKey,
+    keys
+  );
 }
