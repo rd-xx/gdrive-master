@@ -51,7 +51,11 @@ async function main() {
     console.log();
 
     writeConfig({ debug: false, verbose: false, apiToken: null });
-    exit();
+    const token = await askApiToken();
+    if (!token) return exit();
+    updateConfig({ apiToken: token });
+    console.log(t(`prompts.apiToken.updated`));
+    return exit();
   }
 
   const config = await getConfig();
