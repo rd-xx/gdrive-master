@@ -10,14 +10,22 @@ import {
   writeConfig
 } from './helpers/config.helper.js';
 
+// Setup global variables
+const rootPath = process.argv[1].includes('snapshot')
+  ? dirname(dirname(process.argv[1]))
+  : process.cwd();
+global.paths = {
+  root: rootPath,
+  config: join(rootPath, 'config.json'),
+  locales: join(rootPath, 'locales')
+};
+
 // Setup i18n
 i18n.configure({
   locales: ['en', 'fr', 'pt'],
   defaultLocale: 'en',
   fallbacks: { 'fr-*': 'fr', 'pt-*': 'pt' },
-  directory: process.argv[1].includes('snapshot')
-    ? join(dirname(dirname(process.argv[1])), 'locales')
-    : join(process.cwd(), 'locales'),
+  directory: globalThis.paths.locales,
   objectNotation: true
 });
 i18n.setLocale(Intl.DateTimeFormat().resolvedOptions().locale);
