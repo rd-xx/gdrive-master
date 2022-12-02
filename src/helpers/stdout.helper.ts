@@ -1,4 +1,4 @@
-import { OperatingMode, WorkingMode } from '../types/miscellaneous.types.js';
+import { OperatingMode, WorkingMode } from '../utils/types.js';
 import { readFile } from 'fs/promises';
 import { dirname, join } from 'path';
 import { writeFile } from 'fs';

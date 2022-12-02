@@ -1,4 +1,4 @@
-import { OperatingMode, WorkingMode } from '../types/miscellaneous.types.js';
+import { OperatingMode, WorkingMode } from '../utils/types.js';
 import { setProject } from './gcloud.helper.js';
 import prompts from 'prompts';
 import i18n from 'i18n';
