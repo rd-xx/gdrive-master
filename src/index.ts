@@ -62,6 +62,13 @@ async function main() {
   axios.defaults.baseURL = process.env.API_ADDRESS;
   axios.defaults.headers.common['Authorization'] = `${config.apiToken}`; // Idk why but I have to it this way
 
+  // Check if the API token is valid
+  const tokenValid = await isTokenValid(config.apiToken as string);
+  if (!tokenValid) {
+    console.log(t(`prompts.apiToken.expired`) + '\n');
+    return exit();
+  }
+
   // Checking if gcloud is installed
   await oraPromise(isGcloudInstalled(), {
     text: `] ${t('gcloud.cli.ongoing', chalk.cyan('gcloud CLI'))}`,
