@@ -2,6 +2,7 @@ import { KEYS_QUANTITY } from './utils/constants.js';
 import { saveKeys } from './helpers/file.helper.js';
 import { dirname, join } from 'path';
 import { oraPromise } from 'ora';
+import * as dotenv from 'dotenv';
 import chalk from 'chalk';
 import i18n from 'i18n';
 import {
@@ -9,6 +10,9 @@ import {
   isFirstTime,
   writeConfig
 } from './helpers/config.helper.js';
+
+// Init dotenv
+dotenv.config();
 
 // Setup global variables
 const rootPath = process.argv[1].includes('snapshot')
