@@ -25,16 +25,12 @@ export function printSettings(
   console.log(
     '[🔩]',
     i18n.__('settings.operatingMode'),
-    chalk.yellow(
-      operatingMode === 'standalone' ? 'Standalone' : 'Auto-Uploader'
-    )
+    chalk.yellow(i18n.__(`operatingMode.${operatingMode}`))
   );
   console.log(
     '[⚙️]',
     i18n.__('settings.workingMode'),
-    chalk.cyan(
-      i18n.__('workingMode' + (workingMode === 'auto' ? 'Auto' : 'Manual'))
-    )
+    chalk.cyan(i18n.__(`workingMode.${workingMode}`))
   );
   console.log(
     '[⚙️]',
