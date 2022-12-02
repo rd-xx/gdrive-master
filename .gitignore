@@ -6,3 +6,4 @@ build/release
 build/bundled.js
 config.json
 stacktrace.txt
+.env
