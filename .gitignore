@@ -4,3 +4,4 @@ keys*.json
 build/.pkg-cache
 build/release
 build/bundled.js
+config.json

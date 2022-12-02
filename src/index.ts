@@ -5,29 +5,10 @@ import { oraPromise } from 'ora';
 import chalk from 'chalk';
 import i18n from 'i18n';
 import {
-  askProjectCreation,
-  askOperatingMode,
-  askKeysQuantity,
-  askWorkingMode,
-  askProjectId,
-  askSaveKeys
-} from './helpers/prompts.helper.js';
-import {
-  isGcloudInstalled,
-  enableDriveApi,
-  createProject,
-  setProject,
-  createKey,
-  getEmail,
-  logout,
-  login
-} from './helpers/gcloud.helper.js';
-import {
-  printSettings,
-  handleError,
-  welcomeUser,
-  exit
-} from './helpers/stdout.helper.js';
+  getConfig,
+  isFirstTime,
+  writeConfig
+} from './helpers/config.helper.js';
 
 // Setup i18n
 i18n.configure({
@@ -44,6 +25,18 @@ i18n.setLocale(Intl.DateTimeFormat().resolvedOptions().locale);
 async function main() {
   // Print the project name + version
   await welcomeUser();
+
+  // Checks if it's the first time the user is running the program
+  if (await isFirstTime()) {
+    console.log(t(`firstTime.welcome`), '\n');
+    console.log(t(`firstTime.one`, chalk.yellow(t(`firstTime.two`))));
+    console.log();
+
+    writeConfig({ debug: false, verbose: false, apiToken: null });
+    exit();
+  }
+
+  const config = await getConfig();
 
   // Checking if gcloud is installed
   await oraPromise(isGcloudInstalled(), {

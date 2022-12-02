@@ -12,6 +12,11 @@
     "workingMode": "Working mode:",
     "keys": "Quantity of keys:"
   },
+  "firstTime": {
+    "welcome": "Looks like you are using the app for the first time.",
+    "one": "A config file was created with default settings.\nYou can change them manually, %s :)",
+    "two": "just don't break the syntax"
+  },
   "prompts": {
     "operatingMode": {
       "message": "Which operating mode do you want to use?",
