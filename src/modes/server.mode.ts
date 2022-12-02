@@ -54,10 +54,23 @@ export default async function serverMode() {
   await welcomeUser();
   printSettings('server', workingMode, keysQuantity);
 
-  // Enable the Google Drive API
-  await oraPromise(enableDriveApi(), {
-    text: `] ${t('gcloud.api.enabling', chalk.cyan('Google Drive'))}`,
-    successText: `] ${t('gcloud.api.enabled', chalk.cyan('Google Drive'))}\n`,
+  // // Enable the Google Drive API
+  // await oraPromise(enableDriveApi(), {
+  //   text: `] ${t('gcloud.api.enabling', chalk.cyan('Google Drive'))}`,
+  //   successText: `] ${t('gcloud.api.enabled', chalk.cyan('Google Drive'))}\n`,
+  //   prefixText: '['
+  // });
+
+  // Create the service account
+  await oraPromise(createServiceAccount(), {
+    text: `] ${t(
+      'gcloud.serviceAccount.ongoing',
+      chalk.cyan(SERVICE_ACCOUNT_NAME)
+    )}`,
+    successText: `] ${t('gcloud.serviceAccount.done')}`,
+    prefixText: '['
+  });
+
     prefixText: '['
   });
 

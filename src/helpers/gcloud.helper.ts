@@ -123,15 +123,15 @@ export async function createKey(): Promise<string> {
   });
 }
 
-// export function createServiceAccount(): void {
-//   spawnSync(
-//     'gcloud',
-//     ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
-//     {
-//       shell: true
-//     }
-//   );
-// }
+export async function createServiceAccount(): Promise<void> {
+  return new Promise((resolve) => {
+    const cmd = spawn(
+      'gcloud',
+      ['iam', 'service-accounts', 'create', SERVICE_ACCOUNT_NAME],
+      {
+        shell: true
+      }
+    );
 
 // export function getServiceAccount(): string | null {
 //   const cmd = spawnSync('gcloud', ['iam', 'service-accounts', 'list'], {
