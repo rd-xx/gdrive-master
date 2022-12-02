@@ -1,22 +1,25 @@
-import { RequestOptions } from '../types/miscellaneous.types.js';
+import { ApiUpdate, ApiCheckEmail } from '../utils/types.js';
+import axios from 'axios';
 
-async function request(
-  url: string,
-  { method = 'GET', headers = {}, body = undefined }: RequestOptions
-) {}
+export async function getLatestUpdate(): Promise<ApiUpdate> {
+  const request = await axios.get('update/gdm');
+  return request.data;
+}
 
-export function checkIfEmailExists(email: string): Promise<boolean> {
-  return new Promise((resolve, reject) => {
-    fetch(`localhost:3000/gdrive/check/${email}`).then(async (res) => {
-      if (res.status !== 200) {
-        reject(
-          'Ocorreu um erro inesperado ao verificar se o email da Google Drive existe.'
-        );
-        return;
-      }
+export async function checkEmail(email: string): Promise<ApiCheckEmail> {
+  const request = await axios.get(`gdrive/check/${email}`);
+  return request.data;
+}
 
-      const data = await res.json();
-      resolve(data.data);
-    });
+export async function addAccount(
+  email: string,
+  serviceAccount: Record<string, string>,
+  keys: string[]
+): Promise<unknown> {
+  const request = await axios.post('gdrive/add', {
+    email,
+    serviceAccount,
+    keys
   });
+  return request.data;
 }
