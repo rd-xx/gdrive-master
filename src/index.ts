@@ -76,18 +76,13 @@ async function main() {
     return exit();
   }
 
-  // Save the keys
-  if (shouldSave) {
-    const email = getEmail(),
-      fileName = await saveKeys(email, keys);
-    if (!fileName) return;
-    console.log(i18n.__('prompts.keys.save.saved'), chalk.cyan(fileName));
-  } else {
-    console.log('');
-    for (const key of keys) console.log(key);
-  }
+  // Ask the user what which operating mode he wants to use
+  const operatingMode = await askOperatingMode();
+  if (!operatingMode) return;
+  else if (operatingMode === 'standalone') await standaloneMode();
+  else await serverMode();
 
-  console.log('\n' + i18n.__('exit.bye'));
+  console.log('\n' + t('exit.bye'));
   exit();
 }
 
