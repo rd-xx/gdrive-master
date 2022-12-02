@@ -45,10 +45,21 @@
     }
   },
   "gcloud": {
-    "checking": "Checking if %s is installed...",
-    "installed": "%s detected.",
-    "notInstalled": "Seems like you don't have %s installed. Please install it and try again.",
     "quotaExceeded": "You have exceeded your project quota. Please use a different Google account.",
+    "cli": {
+      "ongoing": "Checking if %s is installed...",
+      "done": "%s detected.",
+      "failed": "Seems like you don't have %s installed. Please install it and try again."
+    },
+    "logout": {
+      "ongoing": "Logging out of all Google accounts...",
+      "done": "Logged out of all Google accounts."
+    },
+    "login": {
+      "ongoing": "Logging in to Google...",
+      "done": "Logged in to Google.",
+      "failed": "You took too long to log in. Operation cancelled."
+    },
     "api": {
       "enabling": "Enabling the %s API...",
       "enabled": "The %s API is now enabled and ready to use."
@@ -58,6 +69,12 @@
       "created": "Key %s successfully created.",
       "failed": "The creation of the key %s has failed. Report the following error to rdx.",
       "done": "All keys have been created."
+    }
+  },
+  "api": {
+    "errors": {
+      "offline": "Seems like the API is offline. Please report this issue to rdx.",
+      "forbidden": "Seems like your token has been revoked. You are not allowed to use gdrive-master anymore.\nIf you think this is mistake, please report this issue to rdx."
     }
   },
   "errors": {
