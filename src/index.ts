@@ -1,5 +1,10 @@
-import { KEYS_QUANTITY } from './utils/constants.js';
-import { saveKeys } from './helpers/file.helper.js';
+import { isGcloudInstalled, logout, login } from './helpers/gcloud.helper.js';
+import { handleError, welcomeUser, exit } from './helpers/stdout.helper.js';
+import { askOperatingMode } from './helpers/prompts.helper.js';
+import { checkEmail, getLatestUpdate } from './helpers/api.helper.js';
+import standaloneMode from './modes/standalone.mode.js';
+import serverMode from './modes/server.mode.js';
+import axios, { AxiosError } from 'axios';
 import { dirname, join } from 'path';
 import { oraPromise } from 'ora';
 import * as dotenv from 'dotenv';
@@ -60,33 +65,33 @@ async function main() {
     prefixText: '['
   });
 
-  // Logout from gcloud
-  if (config.verbose)
-    await oraPromise(logout(), {
-      text: `] ${t('gcloud.logout.ongoing')}`,
-      successText: `] ${t('gcloud.logout.done')}`,
-      prefixText: '['
-    });
-  else await logout();
+  // // Logout from gcloud
+  // if (config.verbose)
+  //   await oraPromise(logout(), {
+  //     text: `] ${t('gcloud.logout.ongoing')}`,
+  //     successText: `] ${t('gcloud.logout.done')}`,
+  //     prefixText: '['
+  //   });
+  // else await logout();
 
-  // Login to gcloud
-  try {
-    await oraPromise(login(), {
-      text: `] ${t('gcloud.login.ongoing')}`,
-      successText: `] ${t('gcloud.login.done')}\n`,
-      failText: `] ${chalk.red(t('gcloud.login.failed'))}`,
-      prefixText: '['
-    });
-  } catch (err) {
-    console.log();
-    return exit();
-  }
+  // // Login to gcloud
+  // try {
+  //   await oraPromise(login(), {
+  //     text: `] ${t('gcloud.login.ongoing')}`,
+  //     successText: `] ${t('gcloud.login.done')}\n`,
+  //     failText: `] ${chalk.red(t('gcloud.login.failed'))}`,
+  //     prefixText: '['
+  //   });
+  // } catch (err) {
+  //   console.log();
+  //   return exit();
+  // }
 
-  // Ask the user what which operating mode he wants to use
-  const operatingMode = await askOperatingMode();
-  if (!operatingMode) return;
-  else if (operatingMode === 'standalone') await standaloneMode();
-  else await serverMode();
+  // // Ask the user what which operating mode he wants to use
+  // const operatingMode = await askOperatingMode();
+  // if (!operatingMode) return;
+  // else if (operatingMode === 'standalone') await standaloneMode();
+  // else await serverMode();
 
   console.log('\n' + t('exit.bye'));
   exit();
