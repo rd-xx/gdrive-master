@@ -77,6 +77,8 @@ export default async function serverMode() {
     successText: `] ${t('gcloud.serviceAccountKey.done')}\n`,
     prefixText: '['
   });
+  const serviceAccountKey = await getKeyFile(),
+  await deleteKeyFile();
 
   // Create the keys
   const keys: string[] = [];

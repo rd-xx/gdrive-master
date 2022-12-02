@@ -1,6 +1,9 @@
 import { handleError } from './stdout.helper.js';
 import { readdir, writeFile } from 'fs';
+import fsExtra from 'fs-extra';
 import { join } from 'path';
+
+const { readJSON, rm } = fsExtra;
 
 export async function saveKeys(
   email: string,
@@ -28,4 +31,12 @@ export async function saveKeys(
       });
     });
   });
+}
+
+export async function getKeyFile(): Promise<Record<string, string>> {
+  return await readJSON(join(globalThis.paths.root, 'key.json'));
+}
+
+export async function deleteKeyFile(): Promise<void> {
+  await rm(join(globalThis.paths.root, 'key.json'));
 }
