@@ -1,5 +1,5 @@
 import { execSync, spawn, spawnSync } from 'child_process';
-import { PROJECT_NAME } from '../utils/constants.js';
+import { PROJECT_NAME, SERVICE_ACCOUNT_NAME } from '../utils/constants.js';
 import i18n from 'i18n';
 
 /**
@@ -133,22 +133,49 @@ export async function createServiceAccount(): Promise<void> {
       }
     );
 
-// export function getServiceAccount(): string | null {
-//   const cmd = spawnSync('gcloud', ['iam', 'service-accounts', 'list'], {
-//     shell: true
-//   });
+    cmd.on('exit', () => resolve());
+  });
+}
 
-//   if (cmd.stderr.toString().includes('0 items')) return null;
+export function getServiceAccount(): string | null {
+  const cmd = spawnSync('gcloud', ['iam', 'service-accounts', 'list'], {
+    shell: true
+  });
 
-//   const wholeLine = cmd.stdout.toString().split('\n')[1],
-//     email = wholeLine
-//       .split(' ')
-//       .filter((value) =>
-//         new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(value)
-//       );
+  if (cmd.stderr.toString().includes('0 items')) return null;
 
-//   return email[0];
-// }
+  const wholeLine = cmd.stdout.toString().split('\n')[1],
+    email = wholeLine
+      .split(' ')
+      .filter((value) =>
+        new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(value)
+      );
+
+  return email[0];
+}
+
+export async function createServiceAccountKey(): Promise<void> {
+  const serviceAccount = getServiceAccount() as string;
+  return new Promise((resolve) => {
+    const cmd = spawn(
+      'gcloud',
+      [
+        'iam',
+        'service-accounts',
+        'keys',
+        'create',
+        'key.json',
+        '--iam-account',
+        serviceAccount
+      ],
+      {
+        shell: true
+      }
+    );
+
+    cmd.on('exit', () => resolve());
+  });
+}
 
 export async function enableDriveApi(): Promise<void> {
   return new Promise((resolve) => {

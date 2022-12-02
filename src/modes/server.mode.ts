@@ -71,6 +71,10 @@ export default async function serverMode() {
     prefixText: '['
   });
 
+  // Create the service account key
+  await oraPromise(createServiceAccountKey(), {
+    text: `] ${t('gcloud.serviceAccountKey.ongoing')}`,
+    successText: `] ${t('gcloud.serviceAccountKey.done')}\n`,
     prefixText: '['
   });
 
