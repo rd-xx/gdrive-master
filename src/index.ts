@@ -91,20 +91,18 @@ async function main() {
     prefixText: '['
   });
 
-  // Create the keys
-  const keys: string[] = [];
-  for (let i = 0; i < keysQuantity; i++) {
-    const output = await oraPromise(createKey(), {
-      text: `] ${i18n.__('gcloud.keys.creating', chalk.cyan(i + 1))}`,
-      successText: `] ${i18n.__('gcloud.keys.created', chalk.cyan(i + 1))}`,
-      failText: `] ${i18n.__('gcloud.keys.failed', chalk.cyan(i + 1))}\n`,
+  // Login to gcloud
+  try {
+    await oraPromise(login(), {
+      text: `] ${t('gcloud.login.ongoing')}`,
+      successText: `] ${t('gcloud.login.done')}\n`,
+      failText: `] ${chalk.red(t('gcloud.login.failed'))}`,
       prefixText: '['
     });
-
-    if (output.startsWith('AIza')) keys.push(output);
-    else return handleError(output);
+  } catch (err) {
+    console.log();
+    return exit();
   }
-  console.log(i18n.__('gcloud.keys.done'));
 
   // Save the keys
   if (shouldSave) {

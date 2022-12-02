@@ -21,17 +21,20 @@ export async function isGcloudInstalled(): Promise<boolean> {
 /**
  * Log in to the Google Cloud Platform. This will open a new browser window.
  *
- * @returns Nothing.
+ * @returns {Promise<void>} doesn't return anything.
  */
-export function login() {
-  const login = spawnSync('gcloud', ['auth', 'login'], {
-    shell: true
-  });
+export async function login(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const cmd = spawn('gcloud', ['auth', 'login'], {
+      shell: true
+    });
 
-  if (login.error) {
-    console.log(login.error);
-    return;
-  }
+    cmd.stderr.on('data', (data) => {
+      if (String(data).includes('You are now logged in as')) resolve();
+    });
+
+    setTimeout(() => reject(), 120000);
+  });
 }
 
 /**
