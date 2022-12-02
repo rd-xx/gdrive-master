@@ -29,6 +29,7 @@ i18n.configure({
   objectNotation: true
 });
 i18n.setLocale(Intl.DateTimeFormat().resolvedOptions().locale);
+const t = i18n.__; // t stands for translate
 
 async function main() {
   // Print the project name + version
@@ -48,9 +49,8 @@ async function main() {
 
   // Checking if gcloud is installed
   await oraPromise(isGcloudInstalled(), {
-    text: `] ${i18n.__('gcloud.checking', chalk.cyan('gcloud CLI'))}`,
-    successText: `] ${i18n.__('gcloud.installed', chalk.cyan('gcloud CLI'))}\n`,
-    failText: `] ${i18n.__('gcloud.notInstalled', chalk.cyan('gcloud CLI'))}`,
+    text: `] ${t('gcloud.cli.ongoing', chalk.cyan('gcloud CLI'))}`,
+    failText: `] ${t('gcloud.cli.failed', chalk.cyan('gcloud CLI'))}`,
     prefixText: '['
   });
 
