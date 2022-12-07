@@ -2,10 +2,8 @@ import { ApiUpdate, ApiCheckEmail } from '../utils/types.js';
 import axios from 'axios';
 
 export async function isTokenValid(token: string): Promise<boolean> {
-  const request = await axios.get(process.env.API_ADDRESS + '/update/gdm', {
-    headers: {
-      Authorization: `${token}`
-    },
+  const request = await axios.get('update/gdm', {
+    headers: { Authorization: token },
     validateStatus(status) {
       return status < 500;
     }
