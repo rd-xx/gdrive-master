@@ -115,10 +115,14 @@ axios.interceptors.response.use(
     if (error instanceof AxiosError)
       if (error.response && error.response.status === 403) {
         console.log('\n' + t('api.errors.forbidden') + '\n');
-        exit();
+        return exit();
       } else if (error.stack && error.stack.includes('ECONNREFUSED')) {
         console.log('\n' + t('api.errors.offline') + '\n');
-        exit();
+        return exit();
+      } else {
+        console.log('\n' + t('api.errors.unknown') + '\n');
+        handleError(error.stack ?? error.message);
+        return Promise.reject(error);
       }
 
     // console.log(error);
