@@ -197,5 +197,5 @@ export function getEmail(): string {
   });
 
   // TODO: get first line of the output
-  return cmd.stdout.toString();
+  return cmd.stdout.toString().trim();
 }
