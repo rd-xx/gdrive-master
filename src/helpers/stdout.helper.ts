@@ -52,6 +52,7 @@ export function handleError(stacktrace: string): void {
       return;
     }
   });
+  exit();
 }
 
 export function exit(): void {
