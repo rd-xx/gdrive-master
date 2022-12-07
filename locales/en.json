@@ -86,6 +86,8 @@
     }
   },
   "api": {
+    "addedAccount": "Your Google account has been added to the server. It will be available for use with the Auto-Uploader.",
+    "addedKeys": "It seems like the Google account was already in the server. The created keys have been added and are now available to use with the Auto-Uploader.",
     "errors": {
       "offline": "Seems like the API is offline. Please report this issue to rdx.",
       "forbidden": "Seems like your token has been revoked. You are not allowed to use gdrive-master anymore.\nIf you think this is mistake, please report this issue to rdx."

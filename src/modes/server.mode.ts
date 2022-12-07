@@ -2,6 +2,7 @@ import { gdriveLogin, getAvailableSpace } from '../helpers/gdrive.helper.js';
 import { KEYS_QUANTITY, SERVICE_ACCOUNT_NAME } from '../utils/constants.js';
 import { deleteKeyFile, getKeyFile } from '../helpers/file.helper.js';
 import { getConfig, updateConfig } from '../helpers/config.helper.js';
+import { DriveStorage } from '../utils/types.js';
 import { oraPromise } from 'ora';
 import axios from 'axios';
 import chalk from 'chalk';
@@ -88,26 +89,35 @@ export default async function serverMode() {
   //   prefixText: '['
   // });
 
-  // Create the service account
-  await oraPromise(createServiceAccount(), {
-    text: `] ${t(
-      'gcloud.serviceAccount.ongoing',
-      chalk.cyan(SERVICE_ACCOUNT_NAME)
-    )}`,
-    successText: `] ${t('gcloud.serviceAccount.done')}`,
-    prefixText: '['
-  });
+  const email = getEmail(),
+    accountExists = (await checkEmail(email)).data;
 
-  // Create the service account key
-  await oraPromise(createServiceAccountKey(), {
-    text: `] ${t('gcloud.serviceAccountKey.ongoing')}`,
-    successText: `] ${t('gcloud.serviceAccountKey.done')}\n`,
-    prefixText: '['
-  });
-  const serviceAccountKey = await getKeyFile(),
-    gdriveInstance = gdriveLogin(),
+  // Create service account & key if the account doesn't exist in the database
+  let serviceAccountKey: Record<string, string> | undefined,
+    availableSpace: DriveStorage | undefined;
+  if (!accountExists) {
+    // Create the service account
+    await oraPromise(createServiceAccount(), {
+      text: `] ${t(
+        'gcloud.serviceAccount.ongoing',
+        chalk.cyan(SERVICE_ACCOUNT_NAME)
+      )}`,
+      successText: `] ${t('gcloud.serviceAccount.done')}`,
+      prefixText: '['
+    });
+
+    // Create the service account key
+    await oraPromise(createServiceAccountKey(), {
+      text: `] ${t('gcloud.serviceAccountKey.ongoing')}`,
+      successText: `] ${t('gcloud.serviceAccountKey.done')}\n`,
+      prefixText: '['
+    });
+
+    serviceAccountKey = await getKeyFile();
+    const gdriveInstance = gdriveLogin();
     availableSpace = await getAvailableSpace(gdriveInstance);
-  await deleteKeyFile();
+    await deleteKeyFile();
+  }
 
   // Create the keys
   const keys: string[] = [];
@@ -125,14 +135,19 @@ export default async function serverMode() {
   console.log(chalk.green(t('gcloud.keys.done')));
 
   // Add the keys to the database
-  const email = getEmail(),
-    accountExists = await checkEmail(email);
-  if (accountExists.data) await addKeys(email, keys);
-  else
+  if (accountExists) {
+    await addKeys(email, keys);
+    console.log(t('api.addedKeys'));
+  } else {
+    if (!serviceAccountKey || !availableSpace)
+      return handleError(t('errors.serviceAccountKey'));
+
     await addAccount(
       email,
       Number(availableSpace.limit) - Number(availableSpace.usage),
       serviceAccountKey,
       keys
     );
+    console.log(t('api.addedAccount'));
+  }
 }
