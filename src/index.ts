@@ -1,7 +1,6 @@
 import { isGcloudInstalled, logout, login } from './helpers/gcloud.helper.js';
 import { handleError, welcomeUser, exit } from './helpers/stdout.helper.js';
-import { askApiToken, askOperatingMode } from './helpers/prompts.helper.js';
-import { isTokenValid } from './helpers/api.helper.js';
+import { askOperatingMode } from './helpers/prompts.helper.js';
 import standaloneMode from './modes/standalone.mode.js';
 import serverMode from './modes/server.mode.js';
 import axios, { AxiosError } from 'axios';
@@ -11,7 +10,6 @@ import * as dotenv from 'dotenv';
 import chalk from 'chalk';
 import i18n from 'i18n';
 import {
-  updateConfig,
   isFirstTime,
   writeConfig,
   getConfig
@@ -52,23 +50,11 @@ async function main() {
     console.log();
 
     writeConfig({ debug: false, verbose: false, apiToken: null });
-    const token = await askApiToken();
-    if (!token) return exit();
-    updateConfig({ apiToken: token });
-    console.log(t(`prompts.apiToken.updated`));
     return exit();
   }
 
   const config = await getConfig();
   axios.defaults.baseURL = process.env.API_ADDRESS;
-  axios.defaults.headers.common['Authorization'] = `${config.apiToken}`; // Idk why but I have to it this way
-
-  // Check if the API token is valid
-  const tokenValid = await isTokenValid(config.apiToken as string);
-  if (!tokenValid) {
-    console.log(t(`prompts.apiToken.expired`) + '\n');
-    return exit();
-  }
 
   // Checking if gcloud is installed
   await oraPromise(isGcloudInstalled(), {
