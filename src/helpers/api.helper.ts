@@ -36,3 +36,8 @@ export async function addAccount(
   });
   return request.data;
 }
+
+export async function addKeys(email: string, keys: string[]): Promise<unknown> {
+  const request = await axios.post('gdrive/add/keys', { email, keys });
+  return request.data;
+}

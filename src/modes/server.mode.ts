@@ -2,7 +2,6 @@ import { gdriveLogin, getAvailableSpace } from '../helpers/gdrive.helper.js';
 import { KEYS_QUANTITY, SERVICE_ACCOUNT_NAME } from '../utils/constants.js';
 import { deleteKeyFile, getKeyFile } from '../helpers/file.helper.js';
 import { getConfig, updateConfig } from '../helpers/config.helper.js';
-import { addAccount, isTokenValid } from '../helpers/api.helper.js';
 import { oraPromise } from 'ora';
 import axios from 'axios';
 import chalk from 'chalk';
@@ -28,6 +27,12 @@ import {
   handleError,
   exit
 } from '../helpers/stdout.helper.js';
+import {
+  isTokenValid,
+  checkEmail,
+  addAccount,
+  addKeys
+} from '../helpers/api.helper.js';
 
 const t = i18n.__; // t stands for translate
 
@@ -49,7 +54,7 @@ export default async function serverMode() {
     console.log(t(`prompts.apiToken.updated`));
   }
 
-  axios.defaults.headers.common['Authorization'] = `${config.apiToken}`; // Idk why but I have to it this way
+  axios.defaults.headers.common['Authorization'] = config.apiToken; // Idk why but I have to it this way
 
   // Ask the user what which working mode he wants to use
   const workingMode = await askWorkingMode();
@@ -119,10 +124,15 @@ export default async function serverMode() {
   }
   console.log(chalk.green(t('gcloud.keys.done')));
 
-  await addAccount(
-    getEmail(),
-    Number(availableSpace.limit) - Number(availableSpace.usage),
-    serviceAccountKey,
-    keys
-  );
+  // Add the keys to the database
+  const email = getEmail(),
+    accountExists = await checkEmail(email);
+  if (accountExists.data) await addKeys(email, keys);
+  else
+    await addAccount(
+      email,
+      Number(availableSpace.limit) - Number(availableSpace.usage),
+      serviceAccountKey,
+      keys
+    );
 }
