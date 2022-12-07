@@ -12,6 +12,11 @@
     "workingMode": "Mode de fonctionnement :",
     "keys": "Quantité de clés :"
   },
+  "firstTime": {
+    "welcome": "Il semble que ce soit la première fois que vous exécutez gdrive-master.",
+    "one": "Un fichier de configuration avec des valeurs par défaut a été créé.\nVous pouvez les changer manuellement, %s :)",
+    "two": "tout en faisant attention à ne pas casser la syntaxe"
+  },
   "prompts": {
     "operatingMode": {
       "message": "Quel mode d'opération souhaitez-vous utiliser ?",
@@ -37,13 +42,30 @@
         "message": "Quel est l'Id du projet existant ?",
         "invalid": "Id du projet invalide. Essayez à nouveau."
       }
+    },
+    "apiToken": {
+      "message": "Quel est votre token d'API ?",
+      "invalid": "On dirait que votre token est invalide. Veuillez réessayer.",
+      "updated": "Votre token a été actualisé. Merci de bien vouloir redémarrer le programme pour pouvoir commencer à l'utiliser.",
+      "expired": "Le token d'API sauvegardé n'est plus valide.\nSi vous pensez que c'est une erreur, merci de signaler cet incident auprès de rdx.\nPour l'instant, votre fichier de configuration a été réinitialisé."
     }
   },
   "gcloud": {
-    "checking": "En train de vérifier si %s est installé...",
-    "installed": "%s détecté.",
-    "notInstalled": "Il semblerait que vous n'ayez pas installé %s. Installez-le et essayez à nouveau.",
     "quotaExceeded": "Vous avez dépassé la limite de projets. Veuillez utiliser un compte Google différent.",
+    "cli": {
+      "ongoing": "En train de vérifier si %s est installé...",
+      "done": "%s détecté.",
+      "failed": "Il semblerait que vous n'ayez pas installé %s. Installez-le et essayez à nouveau."
+    },
+    "logout": {
+      "ongoing": "Déconnexion de tous les comptes Google...",
+      "done": "Déconnecté de tous les comptes Google."
+    },
+    "login": {
+      "ongoing": "Connexion à Google...",
+      "done": "Connecté à Google.",
+      "failed": "Vous avez mis trop de temps à vous connecter. Opération annulée."
+    },
     "api": {
       "enabling": "Activation l'API %s...",
       "enabled": "L'API %s est maintenant activée et prête à l'utilisation."
@@ -53,6 +75,23 @@
       "created": "Clé %s créée avec succès.",
       "failed": "La création de clé %s a échouée. Veuillez informer rdx de l'erreur suivante.",
       "done": "Toutes les clés ont été créées."
+    },
+    "serviceAccount": {
+      "ongoing": "Création d'un compte de service appelé %s...",
+      "done": "Compte de service créé."
+    },
+    "serviceAccountKey": {
+      "ongoing": "Création d'une clé pour le compte de service...",
+      "done": "Clé pour le compte de service créée."
+    }
+  },
+  "api": {
+    "addedAccount": "Votre compte Google a été ajouté au serveur.\nIl est maintenant disponible à l'utilisation avec l'Auto-Uploader.",
+    "addedKeys": "On dirait que votre compte a déjà été ajouté au serveur.\nLes clés créées ont été ajoutées et sont maintenant disponibles à l'utilisation avec l'Auto-Uploader.",
+    "errors": {
+      "offline": "On dirait que l'API est offline. Merci de signaler cet incident auprès de rdx.",
+      "forbidden": "On dirait que votre token soit invalide. Vous n'êtes plus autorisé à utiliser gdrive-master.\nSi vous pensez que c'est une erreur, merci de signaler cet incident auprès de rdx.",
+      "unknown": "Une erreur inconnue est survenue. Veuillez signaler cet incident auprès de rdx."
     }
   },
   "errors": {
