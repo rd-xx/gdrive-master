@@ -17,6 +17,7 @@ import {
 import {
   createServiceAccountKey,
   createServiceAccount,
+  enableDriveApi,
   createProject,
   setProject,
   createKey,
@@ -82,12 +83,12 @@ export default async function serverMode() {
   await welcomeUser();
   printSettings('server', workingMode, keysQuantity);
 
-  // // Enable the Google Drive API
-  // await oraPromise(enableDriveApi(), {
-  //   text: `] ${t('gcloud.api.enabling', chalk.cyan('Google Drive'))}`,
-  //   successText: `] ${t('gcloud.api.enabled', chalk.cyan('Google Drive'))}\n`,
-  //   prefixText: '['
-  // });
+  // Enable the Google Drive API
+  await oraPromise(enableDriveApi(), {
+    text: `] ${t('gcloud.api.enabling', chalk.cyan('Google Drive'))}`,
+    successText: `] ${t('gcloud.api.enabled', chalk.cyan('Google Drive'))}\n`,
+    prefixText: '['
+  });
 
   const email = getEmail(),
     accountExists = (await checkEmail(email)).data;
