@@ -56,7 +56,7 @@ export default async function serverMode() {
     console.log(t(`prompts.apiToken.updated`));
   }
 
-  axios.defaults.headers.common['Authorization'] = config.apiToken; // Idk why but I have to it this way
+  axios.defaults.headers.common['Authorization'] = config.apiToken;
 
   // Ask the user what which working mode he wants to use
   const workingMode = await askWorkingMode();
