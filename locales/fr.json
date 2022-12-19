@@ -94,6 +94,12 @@
       "unknown": "Une erreur inconnue est survenue. Veuillez signaler cet incident auprès de rdx."
     }
   },
+  "standalone": {
+    "recap": "Récapitulatif",
+    "projectId": "Id du projet",
+    "serviceAccountKey": "Clé du compte de service",
+    "keys": "Clés"
+  },
   "errors": {
     "unexpected": "Une erreur inespérée est survenue.",
     "stacktrace": "Le stacktrace a été sauvegardé dans %s. Veuillez informer rdx de l'erreur.",

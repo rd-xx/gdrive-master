@@ -94,6 +94,12 @@
       "unknown": "Um erro desconhecido ocorreu. Por favor reporte-o ao rdx."
     }
   },
+  "standalone": {
+    "recap": "Resumo",
+    "projectId": "Id do projeto",
+    "serviceAccountKey": "Chave da conta de serviço",
+    "keys": "Chaves"
+  },
   "errors": {
     "unexpected": "Um erro inesperado ocorreu.",
     "stacktrace": "O erro foi salvo no arquivo %s. Por favor reporte o erro ao rdx.",

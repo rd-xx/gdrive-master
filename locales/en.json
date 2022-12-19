@@ -94,6 +94,12 @@
       "unknown": "An unknown error occured. Please report this issue to rdx."
     }
   },
+  "standalone": {
+    "recap": "Recap",
+    "projectId": "Project Id",
+    "serviceAccountKey": "Service Account key",
+    "keys": "Keys"
+  },
   "errors": {
     "unexpected": "An unexpected error occured.",
     "stacktrace": "The stacktrace has been saved to %s. Please report this issue to rdx.",
