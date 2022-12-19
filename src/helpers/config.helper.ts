@@ -8,7 +8,7 @@ export async function isFirstTime(): Promise<boolean> {
   if (!configExists) return true;
 
   const config = await getConfig();
-  if (!config.apiToken) return true;
+  if (config.apiToken === undefined) return true;
   else return false;
 }
 
@@ -34,7 +34,7 @@ export async function updateConfig({
   const config = await getConfig();
   config.verbose = verbose || config.verbose || false;
   config.debug = debug || config.debug || false;
-  config.apiToken = apiToken || config.apiToken || null;
+  config.apiToken = apiToken === undefined ? config.apiToken : apiToken;
 
   await writeConfig(config);
   return config;
