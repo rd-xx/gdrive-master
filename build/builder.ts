@@ -61,7 +61,7 @@ async function editMetadata(): Promise<void> {
     'version-string': {
       CompanyName: 'rdx',
       FileDescription: description,
-      ProductName: 'GDrive-Master',
+      ProductName: 'gdrive-master',
       OriginalFilename: 'gdrive-master.exe',
       LegalCopyright: `© 2022 rdx. All Rights Reserved.`
     }
