@@ -113,19 +113,17 @@ axios.interceptors.response.use(
   },
   function (error) {
     if (error instanceof AxiosError)
-      if (error.response && error.response.status === 403) {
+      if (error.response && error.response.status === 403)
         console.log('\n' + t('api.errors.forbidden') + '\n');
-        return exit();
-      } else if (error.stack && error.stack.includes('ECONNREFUSED')) {
+      else if (error.stack && error.stack.includes('ECONNREFUSED'))
         console.log('\n' + t('api.errors.offline') + '\n');
-        return exit();
-      } else {
+      else {
         console.log('\n' + t('api.errors.unknown') + '\n');
-        handleError(error.stack ?? error.message);
         return Promise.reject(error);
       }
 
     // console.log(error);
+    handleError(error.stack ?? error.message);
     return Promise.reject(error);
   }
 );

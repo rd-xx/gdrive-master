@@ -26,8 +26,7 @@ import {
 import {
   printSettings,
   welcomeUser,
-  handleError,
-  exit
+  handleError
 } from '../helpers/stdout.helper.js';
 import {
   isTokenValid,
@@ -45,15 +44,16 @@ export default async function serverMode() {
   if (config.apiToken) {
     const tokenValid = await isTokenValid(config.apiToken as string);
     if (!tokenValid) {
-      console.log(t(`prompts.apiToken.expired`) + '\n');
-      return exit();
+      console.log('\n' + t(`prompts.apiToken.expired`) + '\n');
+      await updateConfig({ apiToken: null });
+      return;
     }
   } else {
     const token = await askApiToken();
-    if (!token) return exit();
+    if (!token) return;
     updateConfig({ apiToken: token });
     config.apiToken = token;
-    console.log(t(`prompts.apiToken.updated`));
+    // console.log(t(`prompts.apiToken.updated`));
   }
 
   axios.defaults.headers.common['Authorization'] = config.apiToken;
@@ -138,7 +138,7 @@ export default async function serverMode() {
   // Add the keys to the database
   if (accountExists) {
     await addKeys(email, keys);
-    console.log(t('api.addedKeys'));
+    console.log('\n\n' + t('api.addedKeys'));
   } else {
     if (!serviceAccountKey || !availableSpace)
       return handleError(t('errors.serviceAccountKey'));
@@ -149,6 +149,6 @@ export default async function serverMode() {
       serviceAccountKey,
       keys
     );
-    console.log(t('api.addedAccount'));
+    console.log('\n\n' + t('api.addedAccount'));
   }
 }
