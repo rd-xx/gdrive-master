@@ -94,7 +94,9 @@ export default async function standaloneMode() {
 
   console.log('\n\n» Récapitulatif');
   console.log(`  - ${t('standalone.projectId')}: ${projectId}`);
-  console.log(`  - ${t('standalone.serviceAccountKey')}: key.json`);
+  console.log(
+    `  - ${t('standalone.serviceAccountKey')}: ` + chalk.yellow('key.json')
+  );
   console.log(
     `  - ${t('standalone.keys')}: ` +
       chalk.cyan(keys.join(chalk.reset(',') + chalk.cyan(' ')))

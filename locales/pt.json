@@ -46,7 +46,7 @@
     "apiToken": {
       "message": "Qual é o seu token da API?",
       "invalid": "Parece que o token não é válido. Tente novamente.",
-      "updated": "O seu token foi atualizado. Reinicie o programa, por favor.",
+      "updated": "O seu token foi atualizado com sucesso.",
       "expired": "O token salvo já não válido.\nSe você pensa que é um engano, por favor reporte isto ao rdx.\nPor enquanto, o seu ficheiro de configuração foi resetado."
     }
   },

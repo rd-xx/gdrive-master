@@ -41,7 +41,7 @@ export function printSettings(
 
 export function handleError(stacktrace: string): void {
   console.log(chalk.red.bold(i18n.__('errors.unexpected')));
-  console.log(i18n.__('errors.stacktrace'));
+  console.log(i18n.__('errors.stacktrace', chalk.yellow('stacktrace.txt')));
 
   writeFile('stacktrace.txt', stacktrace, (err) => {
     if (err) {

@@ -46,7 +46,7 @@
     "apiToken": {
       "message": "Quel est votre token d'API ?",
       "invalid": "On dirait que votre token est invalide. Veuillez réessayer.",
-      "updated": "Votre token a été actualisé. Merci de bien vouloir redémarrer le programme pour pouvoir commencer à l'utiliser.",
+      "updated": "Votre token a bien été actualisé.",
       "expired": "Le token d'API sauvegardé n'est plus valide.\nSi vous pensez que c'est une erreur, merci de signaler cet incident auprès de rdx.\nPour l'instant, votre fichier de configuration a été réinitialisé."
     }
   },
