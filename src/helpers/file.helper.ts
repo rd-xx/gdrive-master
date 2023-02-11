@@ -10,9 +10,9 @@ export async function saveKeys(
   keys: string[]
 ): Promise<string | null> {
   return new Promise((resolve, reject) => {
-    readdir(process.cwd(), (errRead, files) => {
+    readdir(process.cwd(), async (errRead, files) => {
       if (errRead) {
-        handleError(errRead.message);
+        await handleError(errRead.message);
         return reject(false);
       }
 
@@ -21,9 +21,9 @@ export async function saveKeys(
       while (keysFiles.includes(`keys${i}.json`)) i++;
 
       const filePath = join(process.cwd(), `keys${i}.json`);
-      writeFile(filePath, `${email}\n${keys.join('\n')}`, (errWrite) => {
+      writeFile(filePath, `${email}\n${keys.join('\n')}`, async (errWrite) => {
         if (errWrite) {
-          handleError(errWrite.message);
+          await handleError(errWrite.message);
           return reject(null);
         }
 

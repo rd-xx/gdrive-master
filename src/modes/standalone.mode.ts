@@ -85,7 +85,7 @@ export default async function standaloneMode() {
     });
 
     if (output.startsWith('AIza')) keys.push(output);
-    else return handleError(output);
+    else return await handleError(output);
   }
   console.log(chalk.green(t('gcloud.keys.done')));
 

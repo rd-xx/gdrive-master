@@ -39,7 +39,7 @@ export function printSettings(
   );
 }
 
-export function handleError(stacktrace: string): void {
+export async function handleError(stacktrace: string): Promise<void> {
   console.log(chalk.red.bold(i18n.__('errors.unexpected')));
   console.log(i18n.__('errors.stacktrace', chalk.yellow('stacktrace.txt')));
 
@@ -52,15 +52,25 @@ export function handleError(stacktrace: string): void {
       return;
     }
   });
-  exit();
+  await exit();
 }
 
-export function exit(): void {
+export async function exit(): Promise<void> {
   console.log(i18n.__('exit.awaiting'));
+  process.stdout.destroy();
   process.stdin.setRawMode(true);
   process.stdin.resume();
-  process.stdin.on('data', () => {
-    console.log('EXITED'); // For debugging purposes
-    return process.exit.bind(process, 0);
-  });
+
+  async function keypress(): Promise<void> {
+    process.stdin.setRawMode(true);
+    return new Promise((resolve) =>
+      process.stdin.once('data', () => {
+        process.stdin.setRawMode(false);
+        resolve();
+      })
+    );
+  }
+  await keypress();
+
+  process.stdin.once('data', process.exit(0));
 }

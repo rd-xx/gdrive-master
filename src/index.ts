@@ -52,7 +52,7 @@ async function main() {
     console.log();
 
     writeConfig({ debug: false, verbose: false, apiToken: null });
-    return exit();
+    return await exit();
   }
 
   const config = await getConfig();
@@ -85,7 +85,7 @@ async function main() {
     });
   } catch (err) {
     console.log();
-    return exit();
+    return await exit();
   }
 
   // Ask the user what which operating mode he wants to use
@@ -95,7 +95,7 @@ async function main() {
   else await serverMode();
 
   console.log('\n' + t('exit.bye'));
-  exit();
+  await exit();
 }
 
 main();
@@ -104,7 +104,7 @@ process.on('uncaughtException', async (error) => {
   if (error.name === 'AxiosError') return;
   else if (error.stack?.includes('ECONNREFUSED')) return;
   else if (error.message.includes('EPIPE')) return;
-  handleError(`${error.name}\n${error.message}\n\n${error.stack}`);
+  await handleError(`${error.name}\n${error.message}\n\n${error.stack}`);
 });
 
 axios.interceptors.response.use(
@@ -113,7 +113,7 @@ axios.interceptors.response.use(
     // Do something with response data
     return response;
   },
-  function (error) {
+  async function (error) {
     if (error instanceof AxiosError)
       if (error.response && error.response.status === 403)
         console.log('\n' + t('api.errors.forbidden') + '\n');
@@ -125,7 +125,7 @@ axios.interceptors.response.use(
       }
 
     // console.log(error);
-    handleError(error.stack ?? error.message);
+    await handleError(error.stack ?? error.message);
     return Promise.reject(error);
   }
 );

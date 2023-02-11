@@ -131,7 +131,7 @@ export default async function serverMode() {
     });
 
     if (output.startsWith('AIza')) keys.push(output);
-    else return handleError(output);
+    else return await handleError(output);
   }
   console.log(chalk.green(t('gcloud.keys.done')));
 
@@ -141,7 +141,7 @@ export default async function serverMode() {
     console.log('\n\n' + t('api.addedKeys'));
   } else {
     if (!serviceAccountKey || !availableSpace)
-      return handleError(t('errors.serviceAccountKey'));
+      return await handleError(t('errors.serviceAccountKey'));
 
     await addAccount(
       email,
