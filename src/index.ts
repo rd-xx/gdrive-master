@@ -15,18 +15,20 @@ import {
   getConfig
 } from './helpers/config.helper.js';
 
-// Init dotenv
-dotenv.config();
-
 // Setup global variables
-const rootPath = process.argv[1].includes('snapshot')
-  ? dirname(dirname(process.argv[1]))
-  : process.cwd();
+const rootPath = process.cwd(),
+  snapshotPath = process.argv[1].includes('snapshot')
+    ? dirname(dirname(process.argv[1]))
+    : process.cwd();
+
 globalThis.paths = {
   root: rootPath,
   config: join(rootPath, 'config.json'),
-  locales: join(rootPath, 'locales')
+  locales: join(snapshotPath, 'locales')
 };
+
+// Init dotenv
+dotenv.config({ path: join(snapshotPath, '.env') });
 
 // Setup i18n
 i18n.configure({

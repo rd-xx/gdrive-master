@@ -3,8 +3,6 @@ import { resolve } from 'path';
 import rcedit from 'rcedit';
 import glob from 'glob';
 
-// -------------------------------------------------- \\
-
 process.env.PKG_CACHE_PATH = resolve(process.cwd(), 'build', '.pkg-cache');
 
 const PKG_TARGET = 'node16-win-x64',
@@ -15,6 +13,8 @@ const PKG_TARGET = 'node16-win-x64',
 
 let fetchedBinariesPath = '',
   builtBinariesPath = '';
+
+main();
 
 // -------------------------------------------------- \\
 
@@ -75,9 +75,9 @@ async function build(): Promise<void> {
   await pkg.exec([
     ENTRY_POINT,
     ...['--config', PACKAGE_JSON],
-    ...['--compress', 'Brotli'],
     ...['--target', PKG_TARGET],
     ...['--output', OUTPUT_EXE],
+    ...['--compress', 'Brotli'],
     // '--debug',
     /**
      * Without this (no-bytecode), there will be alot of warnings
@@ -95,7 +95,3 @@ async function build(): Promise<void> {
     );
   });
 }
-
-// -------------------------------------------------- \\
-
-main();
